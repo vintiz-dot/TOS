@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Growth and Development - Interactive Lesson</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CORE STYLES & PRESENTATION FRAMEWORK --- */
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --purple: #8b5cf6;
+            --bg-light: #f8fafc;
+            --text-dark: #0f172a;
+            --slide-width: 1366px;
+            --slide-height: 768px;
+        }
+
+        body {
+            margin: 0;
+            background-color: #1e293b;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Nunito', sans-serif;
+            overflow: hidden;
+            color: var(--text-dark);
+        }
+
+        /* --- THE SLIDE CONTAINER --- */
+        #presentation-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        #presentation-container {
+            width: var(--slide-width);
+            height: var(--slide-height);
+            background: white;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            padding: 40px 60px;
+            box-sizing: border-box;
+            background: var(--bg-light);
+            display: none;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .slide.active { display: flex; opacity: 1; z-index: 10; }
+
+        /* --- TYPOGRAPHY & LAYOUT --- */
+        h1, h2, h3 { font-family: 'Poppins', sans-serif; margin: 0; }
+        .slide-title { font-size: 42px; color: var(--primary); margin-bottom: 20px; font-weight: 700; border-bottom: 4px solid var(--accent); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center;}
+        .content { flex: 1; display: flex; flex-direction: column; position: relative;}
+        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; height: 100%; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        
+        .box { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 2px solid #e2e8f0; }
+        .box-blue { background: #eff6ff; border-color: #bfdbfe; }
+        .box-green { background: #f0fdf4; border-color: #bbf7d0; }
+        .box-purple { background: #faf5ff; border-color: #e9d5ff; }
+
+        /* --- UI CONTROLS (DOCKED AT BOTTOM, NO OVERLAP) --- */
+        .controls-bar {
+            width: var(--slide-width);
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            background: rgba(255,255,255,0.1);
+            padding: 15px 20px;
+            border-radius: 30px;
+        }
+        button { cursor: pointer; border: none; background: var(--secondary); color: white; padding: 12px 25px; border-radius: 20px; font-weight: bold; font-family: 'Poppins'; font-size: 16px; transition: 0.2s; }
+        button:hover { background: var(--primary); transform: translateY(-2px); }
+        .btn-step { background: var(--accent); color: #000; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.4); }
+        .btn-step:hover { background: #d97706; }
+        .btn-shh { background: #ef4444; }
+
+        /* --- SMART REVEAL ANIMATIONS --- */
+        .step-hidden { opacity: 0; transform: translateY(15px); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; visibility: hidden; position: absolute; }
+        .step-visible { opacity: 1; transform: translateY(0); pointer-events: auto; visibility: visible; position: relative; }
+        
+        .answer-reveal {
+            color: var(--success);
+            font-weight: 700;
+            background: #d1fae5;
+            padding: 5px 15px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 10px;
+            border-left: 4px solid var(--success);
+        }
+
+        .match-arrow { color: var(--accent); margin: 0 15px; font-size: 24px; }
+
+        /* --- SPECIFIC COMPONENTS --- */
+        .badge { display: inline-block; padding: 5px 12px; border-radius: 12px; font-size: 16px; font-weight: 700; color: white; background: var(--accent); }
+        .timer-small { font-family: monospace; font-size: 32px; background: #1e293b; color: #10b981; padding: 5px 15px; border-radius: 10px;}
+        
+        /* Noise Meter */
+        .noise-widget { position: absolute; top: 20px; right: 20px; background: white; padding: 10px 15px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; z-index: 100;}
+        .meter-bar { width: 100px; height: 15px; background: #e2e8f0; border-radius: 10px; overflow: hidden; position: relative;}
+        .meter-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #10b981, #f59e0b, #ef4444); transition: width 0.1s linear; }
+
+        /* The SHHH Screen */
+        #shhh-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        #shhh-screen.active { opacity: 1; pointer-events: auto; }
+        #shhh-screen .emoji { font-size: 200px; margin-bottom: 20px; animation: pop 0.5s infinite alternate; }
+        #shhh-screen h1 { font-size: 100px; color: white; margin: 0; text-transform: uppercase; letter-spacing: 5px;}
+        @keyframes pop { from { transform: scale(1); } to { transform: scale(1.15); } }
+
+        /* Frayer Model (4-Square) */
+        .frayer-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 15px; height: 500px; position: relative; margin-top: 20px;}
+        .frayer-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border: 5px solid var(--primary); border-radius: 50%; width: 160px; height: 160px; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 28px; z-index: 5; box-shadow: 0 4px 15px rgba(0,0,0,0.2); color: var(--primary);}
+        .frayer-box { background: white; border: 3px solid #cbd5e1; border-radius: 16px; padding: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05);}
+        .frayer-box h3 { padding: 5px 15px; border-radius: 20px; color: white; margin-bottom: 15px; }
+
+        /* Word Search Grid */
+        .ws-grid { display: grid; grid-template-columns: repeat(24, 1fr); gap: 2px; font-family: monospace; font-size: 16px; font-weight: bold; background: white; padding: 15px; border-radius: 10px; border: 2px solid #cbd5e1; margin-top: 15px;}
+        .ws-cell { display: flex; justify-content: center; align-items: center; width: 22px; height: 22px; border-radius: 4px; transition: 0.3s; }
+        .ws-hl { background-color: var(--accent); color: white; }
+
+        /* Book Text Container */
+        .book-text { font-size: 22px; line-height: 1.7; background: white; padding: 25px; border-radius: 12px; border-left: 6px solid var(--primary); margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
+        .book-text strong { color: var(--primary); }
+
+        .kinesthetic { background: #fef08a; border: 3px dashed #eab308; padding: 20px; border-radius: 16px; text-align: center; font-size: 26px; font-weight: bold; color: #713f12; margin-top: 20px; }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Noise Meter (Global) -->
+    <div class="noise-widget">
+        <button id="btn-mic" style="padding: 5px 10px; font-size: 12px; background: #64748b; border-radius: 8px;"><i class="fa-solid fa-microphone"></i> Start Mic</button>
+        <i class="fa-solid fa-volume-high text-gray-400"></i>
+        <div class="meter-bar"><div class="meter-fill" id="noise-level"></div></div>
+    </div>
+
+    <div id="shhh-screen">
+        <div class="emoji">🤫</div>
+        <h1>SHHHH! QUIET PLEASE!</h1>
+        <button onclick="document.getElementById('shhh-screen').classList.remove('active')" style="margin-top: 40px; font-size: 28px; padding: 15px 40px;">Resume Lesson</button>
+    </div>
+
+    <!-- MAIN WRAPPER -->
+    <div id="presentation-wrapper">
+        
+        <!-- Presentation Container -->
+        <div id="presentation-container">
+
+            <!-- SLIDE 1: Welcome -->
+            <div class="slide active" id="slide-1">
+                <div class="content" style="align-items: center; justify-content: center; text-align: center;">
+                    <div style="background: #e0f2fe; padding: 20px 50px; border-radius: 30px; margin-bottom: 40px; border: 4px solid var(--secondary);">
+                        <h2 style="font-size: 32px; color: var(--secondary); margin-bottom: 10px;"><i class="fa-solid fa-clock"></i> Class Starts In:</h2>
+                        <div style="font-family: monospace; font-size: 100px; font-weight: 800; color: var(--primary);" id="main-timer">03:00</div>
+                    </div>
+                    <h1 style="font-size: 90px; color: var(--primary); line-height: 1.1; margin-bottom: 20px;">Human Growth <br>& Development</h1>
+                    <h2 style="font-size: 36px; color: #64748b; font-weight: 500;">Lesson 19 | Grade 5 Science | CEFR A2</h2>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: The Hook (IBL) -->
+            <div class="slide" id="slide-2">
+                <h2 class="slide-title">See, Think, Wonder <span class="badge" style="background:#8b5cf6;">Harvard Project Zero</span></h2>
+                <div class="content grid-2">
+                    <div class="box box-blue" style="display: flex; flex-direction: column; justify-content: center;">
+                        <h3 style="font-size: 36px; margin-bottom: 30px;"><i class="fa-solid fa-eye"></i> Observe Closely</h3>
+                        <ul style="font-size: 28px; line-height: 1.8; list-style: none; padding: 0;">
+                            <li class="step step-hidden" data-step="1"><strong>See:</strong> What <em>visual changes</em> do you notice over time?</li>
+                            <li class="step step-hidden" data-step="2"><strong>Think:</strong> What do you think is changing <em>inside the brain</em>?</li>
+                            <li class="step step-hidden" data-step="3"><strong>Wonder:</strong> What questions do you have about growing older?</li>
+                        </ul>
+                        <div class="step step-hidden" data-step="4" style="margin-top: 30px; background: #fef08a; padding: 20px; border-radius: 12px; border-left: 6px solid var(--accent);">
+                            <h4 style="margin:0; font-size: 22px; color: #713f12;"><i class="fa-solid fa-bolt"></i> Provoking Question:</h4>
+                            <p style="margin: 5px 0 0 0; font-size: 26px; font-weight: bold;">If your body stops growing taller... do you stop developing?</p>
+                        </div>
+                    </div>
+                    <div style="background: #000; border-radius: 16px; overflow: hidden; position: relative; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/UlgWVAyKcXc?rel=0&controls=1&modestbranding=1" title="Human Aging Timelapse" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: Objectives & Guiding Q -->
+            <div class="slide" id="slide-3">
+                <h2 class="slide-title">Our Mission Today <span class="badge"><i class="fa-solid fa-bullseye"></i> Goals</span></h2>
+                <div class="content" style="align-items: center; justify-content: center;">
+                    <div class="box" style="width: 80%; padding: 40px;">
+                        <ul style="font-size: 32px; line-height: 2; list-style: none; padding: 0;">
+                            <li class="step step-hidden" data-step="1"><i class="fa-solid fa-brain" style="color: #ef4444; width: 40px;"></i> <strong>Remember:</strong> Learn life stage vocabulary words.</li>
+                            <li class="step step-hidden" data-step="2"><i class="fa-solid fa-magnifying-glass" style="color: #f59e0b; width: 40px;"></i> <strong>Understand:</strong> Identify physical vs. mental changes.</li>
+                            <li class="step step-hidden" data-step="3"><i class="fa-solid fa-layer-group" style="color: #10b981; width: 40px;"></i> <strong>Apply:</strong> Classify people into stages based on clues.</li>
+                            <li class="step step-hidden" data-step="4"><i class="fa-solid fa-rocket" style="color: #8b5cf6; width: 40px;"></i> <strong>Create:</strong> Predict how YOU will change in 10 years!</li>
+                        </ul>
+                    </div>
+                    <div class="step step-hidden" data-step="5" style="margin-top: 40px; text-align: center;">
+                        <h3 style="font-size: 36px; color: var(--primary); margin-bottom: 10px;">Guiding Question:</h3>
+                        <p style="font-size: 32px; font-weight: bold; background: #e0e7ff; padding: 15px 40px; border-radius: 30px; display: inline-block;">"How is a toddler different from an adolescent?"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: EBP Vocabulary (4-Square) -->
+            <div class="slide" id="slide-4">
+                <h2 class="slide-title">Vocabulary Strategy <span class="badge" style="background:#10b981;">EBP 4-Square Method</span></h2>
+                <div class="content">
+                    <p style="font-size: 26px; text-align: center; font-weight: bold;">Divide your page into 4 sections. Let's map out our new word!</p>
+                    <div class="frayer-grid">
+                        <div class="frayer-center">Adolescence</div>
+                        
+                        <div class="frayer-box step step-hidden" data-step="1">
+                            <h3 style="background: var(--primary);">Meaning (Definition)</h3>
+                            <p style="font-size: 26px;">The period from 12 to 19 years old when kids become teenagers and go through puberty.</p>
+                        </div>
+                        
+                        <div class="frayer-box step step-hidden" data-step="2">
+                            <h3 style="background: var(--success);">Quick Sketch</h3>
+                            <i class="fa-solid fa-person-snowboarding" style="font-size: 80px; color: #10b981; margin-top: 10px;"></i>
+                        </div>
+                        
+                        <div class="frayer-box step step-hidden" data-step="3">
+                            <h3 style="background: var(--accent);">Make a Sentence</h3>
+                            <p style="font-size: 26px;">"During <strong>adolescence</strong>, the body goes through significant external and internal changes."</p>
+                        </div>
+                        
+                        <div class="frayer-box step step-hidden" data-step="4">
+                            <h3 style="background: var(--purple);">Connections</h3>
+                            <p style="font-size: 26px;">Vietnamese: Tuổi vị thành niên<br>Related words: Teenager, Puberty</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: Physical vs Mental -->
+            <div class="slide" id="slide-5">
+                <h2 class="slide-title">Two Types of Changes <span class="badge">Concept Mapping</span></h2>
+                <div class="content grid-2">
+                    <div class="box box-green" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                        <i class="fa-solid fa-child-reaching" style="font-size: 120px; color: #10b981; margin-bottom: 20px;"></i>
+                        <h3 style="font-size: 60px; color: #064e3b; margin-bottom: 10px;">Physical</h3>
+                        <p style="font-size: 32px;">Changes you can <strong>SEE</strong> on the outside.</p>
+                    </div>
+                    <div class="box box-purple" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                        <i class="fa-solid fa-head-side-virus" style="font-size: 120px; color: #8b5cf6; margin-bottom: 20px;"></i>
+                        <h3 style="font-size: 60px; color: #4c1d95; margin-bottom: 10px;">Mental</h3>
+                        <p style="font-size: 32px;">Changes happening <strong>INSIDE</strong> the brain.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: Vocabulary in Context (Early) -->
+            <div class="slide" id="slide-6">
+                <h2 class="slide-title">Vocabulary in Context: Early Stages <span class="badge" style="background:#3b82f6;">📖 Page 36</span></h2>
+                <div class="content">
+                    <div class="book-text">
+                        <strong>Fetal stage: 9 months in womb</strong><br>
+                        The fetal stage occurs within the mother's womb and is the first step in human growth and development. After spending around nine months in its mother's womb, a baby will be born.
+                    </div>
+                    <div class="book-text">
+                        <strong>Infancy: 0-1 year old</strong><br>
+                        At this stage, the infant is still very dependent on its mother, but it can now breathe independently, and cry when it feels hungry, cold, hot, or generally uncomfortable. An infant cannot speak.
+                    </div>
+                    <div class="book-text">
+                        <strong>Toddler: 1-12 years old</strong><br>
+                        The next stage of growth begins at the infant's first birthday, when it officially becomes a toddler. At this point, it has entered childhood. Throughout childhood, kids are constantly growing and learning new skills, such as walking, talking, and eating on their own.
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: Vocabulary in Context (Later) + Kinesthetic -->
+            <div class="slide" id="slide-7">
+                <h2 class="slide-title">Vocabulary in Context: Later Stages <span class="badge" style="background:#3b82f6;">📖 Page 37</span></h2>
+                <div class="content">
+                    <div class="book-text">
+                        <strong>Adolescence: 12-19 years old.</strong><br>
+                        At this stage, kids become teenagers. Puberty takes place at this point in human growth. It takes place at different times depending on the person, but generally occurs from 13 to 19 years old. During puberty, growth takes place at a rapid rate, and the body goes through significant external and internal changes.
+                    </div>
+                    <div class="book-text">
+                        <strong>Adulthood: 20 - 65 years old</strong><br>
+                        Within this stage, divisions can be made: young adults are 20 to 36 years old, middle-aged adults are 36 to 55 years old, and older adults are 55 to 65 years old. This is the most independent stage in human growth so far. It is at this point that people usually begin to reproduce and have children of their own.
+                    </div>
+                    <div class="book-text">
+                        <strong>Elderly: > 65 years old</strong><br>
+                        This stage lasts until death, and so can vary in terms of length. This is the very last stage of human growth.
+                    </div>
+                    
+                    <div class="kinesthetic">
+                        <i class="fa-solid fa-person-arrow-up-from-line"></i> STAND UP if you have an Adolescent in your house! <br>
+                        <i class="fa-solid fa-chair"></i> SIT DOWN. <br>
+                        <i class="fa-solid fa-person-arrow-up-from-line"></i> STAND UP if you have a Toddler in your house!
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 8: Talk and Write About It -->
+            <div class="slide" id="slide-8">
+                <h2 class="slide-title">Talk and Write About It <span class="badge" style="background:#3b82f6;">📖 Page 37</span></h2>
+                <div class="content">
+                    <div class="box" style="padding: 40px; font-size: 28px; line-height: 2;">
+                        <div style="margin-bottom: 20px;">
+                            1. The period from 0 to 1 year old is called:
+                            <div class="answer-reveal step step-hidden" data-step="1">Infancy</div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            2. The period from 1 to 12 years old is called:
+                            <div class="answer-reveal step step-hidden" data-step="2">Childhood (starts as Toddler)</div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            3. The period from 12 to 19 years old, when kids become teenagers and go through puberty, is called:
+                            <div class="answer-reveal step step-hidden" data-step="3">Adolescence</div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            4. The period from 20 to 65 years old, when people are most independent, is called:
+                            <div class="answer-reveal step step-hidden" data-step="4">Adulthood</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 9: Practice Q1 & Q2 -->
+            <div class="slide" id="slide-9">
+                <h2 class="slide-title">Practice: Part A <span class="badge" style="background:#3b82f6;">📖 Q1 & Q2 (Pg 37-38)</span></h2>
+                <div class="content grid-2">
+                    <div class="box box-blue">
+                        <h3 style="font-size: 26px; margin-bottom: 20px;">Q1: Look, read and write the stage.</h3>
+                        <div style="font-size: 22px; line-height: 1.8;">
+                            <p>1. They are between 10 and 17 years old.<br>
+                            <span class="answer-reveal step step-hidden" data-step="1">Adolescent / Teenager</span></p>
+                            
+                            <p>2. They go to school, and they have lots of energy.<br>
+                            <span class="answer-reveal step step-hidden" data-step="2">Child</span></p>
+                            
+                            <p>3. They are between one day old and two years old.<br>
+                            <span class="answer-reveal step step-hidden" data-step="3">Baby / Infant</span></p>
+                            
+                            <p>4. They go to work every day.<br>
+                            <span class="answer-reveal step step-hidden" data-step="4">Adult</span></p>
+                            
+                            <p>5. Which stage are you?<br>
+                            <span class="answer-reveal step step-hidden" data-step="5">Child / Adolescent</span></p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <h3 style="font-size: 26px; margin-bottom: 20px;">Q2: Match the picture with the stage</h3>
+                        <p style="font-size: 22px; color: var(--text-dark);"><em>(Look at the pictures in your book!)</em></p>
+                        <div style="font-size: 24px; font-weight: bold; display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                            <div class="step step-hidden" data-step="6" style="background: #f1f5f9; padding: 10px; border-radius: 8px;">Picture 1 (Boy with hat) <i class="fa-solid fa-arrow-right match-arrow"></i> Child</div>
+                            <div class="step step-hidden" data-step="7" style="background: #f1f5f9; padding: 10px; border-radius: 8px;">Picture 2 (Older couple) <i class="fa-solid fa-arrow-right match-arrow"></i> Elderly</div>
+                            <div class="step step-hidden" data-step="8" style="background: #f1f5f9; padding: 10px; border-radius: 8px;">Picture 3 (Family) <i class="fa-solid fa-arrow-right match-arrow"></i> Adult / Teenager / Child</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 10: The Sprint (Q3, Q4) -->
+            <div class="slide" id="slide-10">
+                <h2 class="slide-title">The 5-Minute Sprint <span class="badge" style="background:#3b82f6;">📖 Q3, Q4 (Pg 38-39)</span></h2>
+                <div class="content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h3 style="font-size: 24px;">Work quietly. Find all 10 words!</h3>
+                        <div class="timer-small" id="sprint-timer">05:00</div>
+                    </div>
+                    
+                    <div class="grid-2" style="grid-template-columns: 1fr 2fr;">
+                        <div class="box box-green">
+                            <h3 style="font-size: 24px; margin-bottom: 15px;">Q3: Correct Order (1 to 6)</h3>
+                            <div class="step step-hidden" data-step="1" style="font-size: 22px; line-height: 1.8;">
+                                1. <span style="color:var(--success); font-weight:bold;">Baby</span><br>
+                                2. <span style="color:var(--success); font-weight:bold;">Toddler</span><br>
+                                3. <span style="color:var(--success); font-weight:bold;">Child</span><br>
+                                4. <span style="color:var(--success); font-weight:bold;">Teenager</span><br>
+                                5. <span style="color:var(--success); font-weight:bold;">Adult</span><br>
+                                6. <span style="color:var(--success); font-weight:bold;">Elderly</span>
+                            </div>
+                        </div>
+                        
+                        <div class="box" style="padding: 10px;">
+                            <h3 style="font-size: 20px; text-align: center; margin: 5px 0;">Q4: Word Search</h3>
+                            <!-- EXACT Transcription of the 24x24 Word Search -->
+                            <div class="ws-grid">
+                                <div>P</div><div>X</div><div>V</div><div>I</div><div>H</div><div>T</div><div>A</div><div>W</div><div>C</div><div>K</div><div>U</div><div>J</div><div>L</div><div>Z</div><div>H</div><div>X</div><div>J</div><div>J</div><div>T</div><div>Z</div><div>W</div><div>B</div><div>Q</div><div>H</div>
+                                <div>V</div><div>G</div><div>C</div><div>X</div><div>H</div><div>C</div><div>D</div><div>F</div><div>K</div><div>T</div><div>E</div><div>F</div><div>D</div><div>N</div><div>I</div><div>A</div><div>E</div><div>Y</div><div>S</div><div>R</div><div>E</div><div>Y</div><div>K</div><div>P</div>
+                                <div>X</div><div>R</div><div>P</div><div>U</div><div>F</div><div>G</div><div>O</div><div>W</div><div>Z</div><div>A</div><div>L</div><div>O</div><div>T</div><div>U</div><div>L</div><div>X</div><div>Y</div><div>R</div><div>Y</div><div>X</div><div>P</div><div>J</div><div>V</div><div>J</div>
+                                <div>I</div><div>Y</div><div>O</div><div>I</div><div>A</div><div>P</div><div>L</div><div>S</div><div>J</div><div>Y</div><div>D</div><div>Y</div><div>I</div><div>I</div><div>R</div><div>Y</div><div>U</div><div>F</div><div>S</div><div>R</div><div>K</div><div>Q</div><div>C</div><div>B</div>
+                                <div>P</div><div>S</div><div>Y</div><div>B</div><div>D</div><div>C</div><div>E</div><div>P</div><div>S</div><div>Y</div><div>E</div><div>H</div><div>F</div><div>O</div><div>I</div><div>F</div><div>G</div><div>C</div><div>J</div><div>R</div><div>A</div><div>X</div><div>U</div><div>K</div>
+                                <div>X</div><div>G</div><div>H</div><div>V</div><div>U</div><div>N</div><div>S</div><div>M</div><div>F</div><div>V</div><div>R</div><div>Y</div><div>M</div><div>T</div><div>N</div><div>C</div><div>T</div><div>A</div><div>N</div><div>J</div><div>Y</div><div>T</div><div>K</div><div>M</div>
+                                <div>U</div><div>V</div><div>A</div><div>V</div><div>L</div><div>C</div><div>C</div><div>K</div><div>P</div><div>V</div><div>L</div><div>U</div><div>U</div><div>B</div><div>F</div><div>N</div><div>M</div><div>N</div><div>O</div><div>J</div><div>W</div><div>U</div><div>U</div><div>L</div>
+                                <div>D</div><div>K</div><div>D</div><div>R</div><div>T</div><div>M</div><div>E</div><div>C</div><div>V</div><div>Y</div><div>Y</div><div>Z</div><div>F</div><div>V</div><div>A</div><div>R</div><div>P</div><div>M</div><div>L</div><div>X</div><div>C</div><div>R</div><div>P</div><div>I</div>
+                                <div>T</div><div>G</div><div>U</div><div>O</div><div>H</div><div>W</div><div>N</div><div>F</div><div>N</div><div>G</div><div>T</div><div>D</div><div>J</div><div>G</div><div>N</div><div>Z</div><div>V</div><div>U</div><div>W</div><div>D</div><div>O</div><div>Y</div><div>U</div><div>F</div>
+                                <div>R</div><div>N</div><div>U</div><div>C</div><div>O</div><div>D</div><div>C</div><div>P</div><div>N</div><div>G</div><div>P</div><div>T</div><div>P</div><div>R</div><div>C</div><div>B</div><div>E</div><div>L</div><div>T</div><div>O</div><div>L</div><div>T</div><div>B</div><div>E</div>
+                                <div>K</div><div>E</div><div>Q</div><div>I</div><div>O</div><div>Z</div><div>E</div><div>E</div><div>V</div><div>F</div><div>K</div><div>F</div><div>J</div><div>A</div><div>Y</div><div>O</div><div>W</div><div>D</div><div>F</div><div>B</div><div>P</div><div>D</div><div>E</div><div>S</div>
+                                <div>Y</div><div>G</div><div>S</div><div>O</div><div>D</div><div>X</div><div>R</div><div>A</div><div>T</div><div>N</div><div>A</div><div>D</div><div>N</div><div>F</div><div>F</div><div>U</div><div>M</div><div>W</div><div>Y</div><div>E</div><div>J</div><div>N</div><div>R</div><div>T</div>
+                                <div>N</div><div>N</div><div>W</div><div>I</div><div class="ws-hl step step-hidden" data-step="2">D</div><div class="ws-hl step step-hidden" data-step="2">E</div><div class="ws-hl step step-hidden" data-step="2">V</div><div class="ws-hl step step-hidden" data-step="2">E</div><div class="ws-hl step step-hidden" data-step="2">L</div><div class="ws-hl step step-hidden" data-step="2">O</div><div class="ws-hl step step-hidden" data-step="2">P</div><div class="ws-hl step step-hidden" data-step="2">M</div><div class="ws-hl step step-hidden" data-step="2">E</div><div class="ws-hl step step-hidden" data-step="2">N</div><div class="ws-hl step step-hidden" data-step="2">T</div><div>B</div><div>Z</div><div>H</div><div>E</div><div>C</div><div>N</div><div>X</div><div>T</div><div>A</div>
+                                <div>H</div><div>A</div><div>J</div><div>H</div><div>M</div><div>W</div><div>K</div><div>M</div><div>L</div><div>V</div><div>K</div><div>N</div><div>J</div><div>U</div><div>Q</div><div>F</div><div>X</div><div>C</div><div>S</div><div>M</div><div>F</div><div>O</div><div>Y</div><div>G</div>
+                                <div>H</div><div>J</div><div>V</div><div>B</div><div>J</div><div>H</div><div>D</div><div>Q</div><div>L</div><div>E</div><div>P</div><div>B</div><div>A</div><div>F</div><div>O</div><div>D</div><div>R</div><div>I</div><div>E</div><div>F</div><div>X</div><div>K</div><div>P</div><div>E</div>
+                                <div>I</div><div>L</div><div>T</div><div>Q</div><div>X</div><div>A</div><div class="ws-hl step step-hidden" data-step="3">C</div><div class="ws-hl step step-hidden" data-step="3">H</div><div class="ws-hl step step-hidden" data-step="3">I</div><div class="ws-hl step step-hidden" data-step="3">L</div><div class="ws-hl step step-hidden" data-step="3">D</div><div class="ws-hl step step-hidden" data-step="3">H</div><div class="ws-hl step step-hidden" data-step="3">O</div><div class="ws-hl step step-hidden" data-step="3">O</div><div class="ws-hl step step-hidden" data-step="3">D</div><div>H</div><div>L</div><div>L</div><div>R</div><div>P</div><div>P</div><div>B</div><div>K</div><div>S</div>
+                                <div>C</div><div>Z</div><div>T</div><div>K</div><div>K</div><div>F</div><div>D</div><div>G</div><div>F</div><div>U</div><div>G</div><div>U</div><div>E</div><div>E</div><div>D</div><div>D</div><div>I</div><div>R</div><div>L</div><div>H</div><div>N</div><div>B</div><div>X</div><div>A</div>
+                                <div>R</div><div>M</div><div>B</div><div>N</div><div>L</div><div>H</div><div>H</div><div>E</div><div>U</div><div>N</div><div>D</div><div>I</div><div>Q</div><div>T</div><div>V</div><div>J</div><div>B</div><div>Q</div><div class="ws-hl step step-hidden" data-step="4">G</div><div class="ws-hl step step-hidden" data-step="4">R</div><div class="ws-hl step step-hidden" data-step="4">O</div><div class="ws-hl step step-hidden" data-step="4">W</div><div class="ws-hl step step-hidden" data-step="4">T</div><div class="ws-hl step step-hidden" data-step="4">H</div>
+                                <div>O</div><div>A</div><div>G</div><div>W</div><div>F</div><div>L</div><div>U</div><div>T</div><div>T</div><div>V</div><div>U</div><div>F</div><div>E</div><div>U</div><div>Q</div><div>R</div><div>P</div><div>A</div><div>M</div><div>Q</div><div>F</div><div>A</div><div>D</div><div>V</div>
+                                <div>U</div><div>X</div><div>D</div><div>W</div><div>S</div><div>F</div><div>U</div><div>W</div><div>C</div><div>Y</div><div>Z</div><div>V</div><div>S</div><div>S</div><div>I</div><div>I</div><div>N</div><div>C</div><div>H</div><div>H</div><div>G</div><div>Y</div><div>K</div><div>O</div>
+                                <div>T</div><div>B</div><div>Z</div><div>N</div><div>S</div><div>Q</div><div>A</div><div>D</div><div>L</div><div>K</div><div>C</div><div>J</div><div>Y</div><div>Z</div><div>W</div><div>B</div><div>J</div><div>L</div><div>X</div><div>V</div><div>H</div><div>M</div><div>O</div><div>O</div>
+                                <div>C</div><div>D</div><div>T</div><div>D</div><div>H</div><div>W</div><div>L</div><div>K</div><div>X</div><div>W</div><div>G</div><div>P</div><div>B</div><div>W</div><div>W</div><div>Y</div><div>Y</div><div>H</div><div>G</div><div>Q</div><div>M</div><div>M</div><div>K</div><div>N</div>
+                                <div>I</div><div>D</div><div>J</div><div>L</div><div>W</div><div>W</div><div>H</div><div>G</div><div>E</div><div>Y</div><div>U</div><div>V</div><div>V</div><div>J</div><div>K</div><div>E</div><div>D</div><div>Y</div><div>Q</div><div>I</div><div>Q</div><div>Q</div><div>X</div><div>P</div>
+                                <div>U</div><div>I</div><div>G</div><div>J</div><div>E</div><div>Y</div><div>H</div><div>N</div><div>Z</div><div>R</div><div>Q</div><div>X</div><div>X</div><div>P</div><div>Y</div><div>A</div><div>B</div><div>W</div><div>J</div><div>O</div><div>Z</div><div>H</div><div>M</div><div>Z</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 11: Match Sentences & Reading (Q5, Q6, Q7) -->
+            <div class="slide" id="slide-11">
+                <h2 class="slide-title">Read and Match <span class="badge" style="background:#3b82f6;">📖 Q5, Q6, Q7 (Pg 39-40)</span></h2>
+                <div class="content grid-2">
+                    <div class="box box-blue" style="font-size: 22px;">
+                        <h3 style="font-size: 26px; margin-bottom: 15px;">Q5: Circle three ways you will develop in the next 10 years.</h3>
+                        <p class="step step-hidden" data-step="1"><i class="fa-solid fa-circle-check" style="color:var(--success);"></i> I will get taller.</p>
+                        <p class="step step-hidden" data-step="2"><i class="fa-solid fa-circle-check" style="color:var(--success);"></i> I will get stronger.</p>
+                        <p style="color:#94a3b8;"><i class="fa-regular fa-circle"></i> My hair will turn gray.</p>
+                        <p class="step step-hidden" data-step="3"><i class="fa-solid fa-circle-check" style="color:var(--success);"></i> I will become an adolescent.</p>
+                        <p style="color:#94a3b8;"><i class="fa-regular fa-circle"></i> I will become an infant.</p>
+                    </div>
+                    
+                    <div class="box" style="font-size: 22px;">
+                        <h3 style="font-size: 26px; margin-bottom: 15px;">Q6: Match parts of the sentences</h3>
+                        <div style="margin-bottom: 15px;">
+                            1. Some adolescents...
+                            <div class="answer-reveal step step-hidden" data-step="4">→ learn how to drive.</div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            2. Adults stop...
+                            <div class="answer-reveal step step-hidden" data-step="5">→ growing taller.</div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            3. Adolescents begin...
+                            <div class="answer-reveal step step-hidden" data-step="6">→ to resemble adults physically.</div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            4. Adulthood is when...
+                            <div class="answer-reveal step step-hidden" data-step="7">→ we reach maturity.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 12: Claim & Defend (T/F) -->
+            <div class="slide" id="slide-12">
+                <h2 class="slide-title">Claim & Defend <span class="badge" style="background:#ef4444;">Evaluate Text Evidence</span></h2>
+                <div class="content grid-2">
+                    <div class="box" style="font-size: 20px; line-height: 1.6; border: 3px solid var(--primary);">
+                        <h3 style="font-size: 24px; margin-bottom: 10px; text-transform: uppercase;">Human Development</h3>
+                        <p>When human babies are born, they look a lot like their parents. They are also different from their parents. Babies are very small. They cannot feed themselves or walk like their parents can.</p>
+                        <p>Each of us grows and changes throughout our lifetime. This process is called development. These changes include physical changes, which are the changes to our bodies. The way our brains work also changes. These changes are called mental changes.</p>
+                        <p>The four main stages of human development are infancy, childhood, adolescence, and adulthood.</p>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <div style="background: #fee2e2; color: #b91c1c; padding: 15px; border-radius: 10px; font-weight: bold; font-size: 20px;">
+                            <i class="fa-solid fa-circle-exclamation"></i> Do not guess! Find the exact sentence that proves it.
+                        </div>
+                        
+                        <div class="box box-blue" style="font-size: 20px; padding: 15px;">
+                            1. Babies don't look like their parents. 
+                            <div class="answer-reveal step step-hidden" style="color:#ef4444; border-color:#ef4444; background:#fee2e2;" data-step="1">FALSE - "they look a lot like their parents."</div>
+                        </div>
+                        
+                        <div class="box box-blue" style="font-size: 20px; padding: 15px;">
+                            2. Physical changes are changes to our bodies.
+                            <div class="answer-reveal step step-hidden" data-step="2">TRUE - "physical changes, which are the changes to our bodies."</div>
+                        </div>
+                        
+                        <div class="box box-blue" style="font-size: 20px; padding: 15px;">
+                            3. Babies need to learn how to feed themselves.
+                            <div class="answer-reveal step step-hidden" data-step="3">TRUE - "They cannot feed themselves" (so they need to learn).</div>
+                        </div>
+
+                        <div class="box box-blue" style="font-size: 20px; padding: 15px;">
+                            4. Children's brains work the same way as a baby's brain.
+                            <div class="answer-reveal step step-hidden" style="color:#ef4444; border-color:#ef4444; background:#fee2e2;" data-step="4">FALSE - "The way our brains work also changes."</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 13: Mini-PBL & Homework -->
+            <div class="slide" id="slide-13">
+                <h2 class="slide-title">Mission Accomplished! <span class="badge" style="background:#10b981;">Create & Review</span></h2>
+                <div class="content grid-2">
+                    <!-- PBL -->
+                    <div class="box box-blue" style="text-align: center;">
+                        <i class="fa-solid fa-user-astronaut" style="font-size: 80px; color: var(--primary); margin-bottom: 10px;"></i>
+                        <h3 style="font-size: 28px; color: var(--secondary); margin-bottom: 15px;">Mini-PBL: Future Me!</h3>
+                        <p style="font-size: 20px; line-height: 1.5; text-align: left;">In 10 years, you will enter Adulthood. Create your profile:</p>
+                        <ul style="font-size: 18px; line-height: 1.6; text-align: left; margin-bottom: 20px;">
+                            <li><strong>Write 2 Physical Changes:</strong> How will your body look?</li>
+                            <li><strong>Write 2 Mental Changes:</strong> How will your brain think differently?</li>
+                        </ul>
+                        <div style="background: white; padding: 10px; border-radius: 10px; border-left: 4px solid var(--accent); text-align: left;">
+                            <p style="font-size: 18px; font-style: italic; margin: 0; color: #64748b;">Starter: "In 10 years, my body will..."</p>
+                        </div>
+                    </div>
+
+                    <!-- Homework -->
+                    <div class="box box-green">
+                        <h3 style="font-size: 28px; color: #064e3b; margin-bottom: 15px;"><i class="fa-solid fa-pen-to-square"></i> Homework Challenge</h3>
+                        <p style="font-size: 20px; line-height: 1.5; text-align: left; margin-bottom: 20px;">
+                            <strong>The Interview:</strong> Ask an adult what their biggest <em>physical</em> and <em>mental</em> changes were when they were a teenager.<br><br>
+                            <strong>Evaluate:</strong> Write 2 sentences comparing their experience to what you learned today.
+                        </p>
+                        <div style="background: #fff; padding: 15px; border-radius: 10px; border: 2px dashed #10b981; font-size: 18px; text-align: left;">
+                            <em>Scaffold: "My dad said his biggest mental change was ___. This is similar to our lesson because ___."</em>
+                        </div>
+                        <p class="step step-hidden" data-step="1" style="font-size: 22px; color: #ef4444; margin-top: 20px; font-weight: bold; text-align: center;">
+                            <i class="fa-solid fa-spell-check"></i> Prepare for our Vocabulary Spelling Bee next class!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- End of Presentation Container -->
+
+        <!-- EXTERNAL UI CONTROLS -->
+        <div class="controls-bar">
+            <button onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Prev Slide</button>
+            <button class="btn-step" onclick="nextStep()">Next Reveal <i class="fa-solid fa-forward-step"></i></button>
+            <button onclick="nextSlide()">Next Slide <i class="fa-solid fa-arrow-right"></i></button>
+            <button class="btn-shh" onclick="triggerShhh()"><i class="fa-solid fa-face-shush"></i> SHHH!</button>
+        </div>
+
+    </div> <!-- End of Main Wrapper -->
+
+    <script>
+        // --- NAVIGATION LOGIC ---
+        let currentSlide = 1;
+        const totalSlides = 13;
+        let currentStep = 0;
+
+        function updateDisplay() {
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                if (index + 1 === currentSlide) {
+                    slide.classList.add('active');
+                    currentStep = 0;
+                    slide.querySelectorAll('.step').forEach(el => {
+                        el.classList.remove('step-visible');
+                        el.classList.add('step-hidden');
+                    });
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateDisplay();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateDisplay();
+            }
+        }
+
+        function nextStep() {
+            const slide = document.getElementById(`slide-${currentSlide}`);
+            const steps = slide.querySelectorAll('.step');
+            
+            let found = false;
+            let targetStepNumber = currentStep + 1;
+            
+            steps.forEach(el => {
+                if (parseInt(el.getAttribute('data-step')) === targetStepNumber) {
+                    el.classList.remove('step-hidden');
+                    el.classList.add('step-visible');
+                    found = true;
+                }
+            });
+
+            if (found) currentStep++;
+            else nextSlide(); 
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { nextStep(); }
+            if (e.key === 'ArrowLeft') { prevSlide(); }
+        });
+
+        // --- TIMER LOGIC ---
+        function startTimer(id, minutes) {
+            let time = minutes * 60;
+            const display = document.getElementById(id);
+            if(!display) return;
+            
+            setInterval(() => {
+                if (time < 0) return;
+                let m = Math.floor(time / 60);
+                let s = time % 60;
+                m = m < 10 ? '0' + m : m;
+                s = s < 10 ? '0' + s : s;
+                display.innerHTML = `${m}:${s}`;
+                time--;
+            }, 1000);
+        }
+
+        startTimer('main-timer', 3);
+        startTimer('sprint-timer', 5);
+
+        // --- NOISE METER & SHHH LOGIC WITH TEXT-TO-SPEECH ---
+        let audioContext;
+        let microphone;
+        let isMicRunning = false;
+
+        document.getElementById('btn-mic').addEventListener('click', async () => {
+            const btn = document.getElementById('btn-mic');
+            
+            if(isMicRunning) {
+                audioContext.suspend();
+                isMicRunning = false;
+                btn.innerHTML = '<i class="fa-solid fa-microphone"></i> Start Mic';
+                btn.style.background = '#64748b';
+                document.getElementById('noise-level').style.width = '0%';
+                return;
+            }
+
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const analyser = audioContext.createAnalyser();
+                microphone = audioContext.createMediaStreamSource(stream);
+                const scriptProcessor = audioContext.createScriptProcessor(2048, 1, 1);
+
+                analyser.smoothingTimeConstant = 0.8;
+                analyser.fftSize = 1024;
+
+                microphone.connect(analyser);
+                analyser.connect(scriptProcessor);
+                scriptProcessor.connect(audioContext.destination);
+                
+                btn.innerHTML = '<i class="fa-solid fa-microphone-slash"></i> Stop Mic';
+                btn.style.background = '#10b981';
+                isMicRunning = true;
+
+                scriptProcessor.onaudioprocess = function() {
+                    const array = new Uint8Array(analyser.frequencyBinCount);
+                    analyser.getByteFrequencyData(array);
+                    let values = 0;
+                    let length = array.length;
+                    for (let i = 0; i < length; i++) { values += (array[i]); }
+                    let average = values / length;
+                    
+                    let percentage = Math.min(100, Math.max(0, average * 1.5));
+                    document.getElementById('noise-level').style.width = percentage + '%';
+
+                    if(percentage > 85 && !document.getElementById('shhh-screen').classList.contains('active')) {
+                        triggerShhh();
+                    }
+                }
+            } catch (err) {
+                alert('Microphone access denied. You can still use the manual SHHH button.');
+            }
+        });
+
+        function triggerShhh() {
+            document.getElementById('shhh-screen').classList.add('active');
+            
+            // Trigger Text-to-Speech Audio
+            if ('speechSynthesis' in window) {
+                const msg = new SpeechSynthesisUtterance("Shhhhh! Please be quiet!");
+                msg.rate = 0.8; 
+                msg.pitch = 1.2;
+                msg.volume = 1;
+                window.speechSynthesis.speak(msg);
+            }
+        }
+
+        updateDisplay();
+    </script>
+</body>
+</html>
