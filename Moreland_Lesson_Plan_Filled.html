@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moreland Lesson Plan — Human Growth & Development</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --accent: #2563eb;
+            --success: #059669;
+            --warning: #d97706;
+            --light-bg: #f8fafc;
+            --border: #cbd5e1;
+            --text: #1e293b;
+            --muted: #64748b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light-bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 50px 60px;
+            margin-bottom: 40px;
+        }
+        .header-banner {
+            background: linear-gradient(135deg, var(--primary), #3b82f6);
+            color: #fff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .header-banner h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+        .header-banner p { font-size: 14px; opacity: 0.85; }
+        
+        h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 8px;
+            margin: 35px 0 18px;
+        }
+        h3 { font-size: 15px; font-weight: 600; color: var(--accent); margin: 15px 0 8px; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 13.5px;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #f1f5f9;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 12.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        td { line-height: 1.55; }
+        
+        .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        .meta-grid .cell {
+            border: 1px solid var(--border);
+            padding: 14px 16px;
+        }
+        .meta-grid .cell.full { grid-column: 1 / -1; }
+        .meta-grid .label {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .meta-grid .value { font-size: 13.5px; }
+        
+        .bloom-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #fff;
+            margin-right: 4px;
+        }
+        .bloom-remember { background: #ef4444; }
+        .bloom-understand { background: #f97316; }
+        .bloom-apply { background: #eab308; color: #000; }
+        .bloom-analyze { background: #22c55e; }
+        .bloom-evaluate { background: #3b82f6; }
+        .bloom-create { background: #8b5cf6; }
+        
+        .ido { color: #dc2626; font-weight: 600; }
+        .wedo { color: #2563eb; font-weight: 600; }
+        .youdo { color: #059669; font-weight: 600; }
+        
+        ul { padding-left: 20px; margin: 6px 0; }
+        li { margin-bottom: 4px; }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 4px;
+            margin-bottom: 4px;
+        }
+        .badge-ibl { background: #dbeafe; color: #1d4ed8; }
+        .badge-pbl { background: #fef3c7; color: #92400e; }
+        .badge-udl { background: #ede9fe; color: #6d28d9; }
+        .badge-diff { background: #d1fae5; color: #065f46; }
+        .badge-thinking { background: #fce7f3; color: #9d174d; }
+        .badge-kagan { background: #ffedd5; color: #c2410c; }
+        
+        .note-box {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            margin: 10px 0;
+        }
+        .misconception-box {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            margin: 10px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        @media print {
+            body { padding: 0; background: #fff; }
+            .page { box-shadow: none; padding: 30px; margin: 0; page-break-after: always; }
+            .header-banner { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+            .bloom-tag, .badge { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="header-banner">
+        <h1>Science Moreland Lesson Plan</h1>
+        <p>Human Growth & Development — Lesson 19 | Natural Science Supplementary Materials</p>
+    </div>
+
+    <!-- ===== TABLE 1: HEADER / METADATA ===== -->
+    <h2>1. Lesson Overview</h2>
+    <div class="meta-grid">
+        <div class="cell">
+            <span class="label">Teacher Candidate</span>
+            <span class="value">Victor</span>
+        </div>
+        <div class="cell">
+            <span class="label">Lesson Title</span>
+            <span class="value">Lesson 19: Human Growth & Development</span>
+        </div>
+        <div class="cell">
+            <span class="label">Grade Level & Course</span>
+            <span class="value">Grade 5 (Class 5H2) — Natural Science (CEFR A2)</span>
+        </div>
+        <div class="cell">
+            <span class="label">Lesson Length</span>
+            <span class="value">55 minutes | Block 2: 8:55–9:50 AM</span>
+        </div>
+        <div class="cell">
+            <span class="label">Date & Room</span>
+            <span class="value">Tuesday, 7 April 2026 | Room M210</span>
+        </div>
+        <div class="cell">
+            <span class="label">Class Size</span>
+            <span class="value">24 students</span>
+        </div>
+        <div class="cell full">
+            <span class="label">Overarching Unit Goal(s)</span>
+            <span class="value">Students will develop an understanding of the biological lifecycle of humans—from the fetal stage through elderly—while building English language proficiency in scientific contexts. They will recognize that human development involves both <strong>physical</strong> (visible body changes) and <strong>mental</strong> (invisible brain/cognitive changes) growth, and apply this understanding to their own lived experiences.</span>
+        </div>
+    </div>
+
+    <!-- Standards -->
+    <h2>2. Standards Alignment</h2>
+    <div class="meta-grid">
+        <div class="cell full">
+            <span class="label">Learning Standard(s) Addressed (NGSS / Vietnamese Curriculum)</span>
+            <span class="value">
+                <strong>NGSS 3-LS1-1:</strong> Develop models to describe that organisms have unique and diverse life cycles but all have in common birth, growth, reproduction, and death.<br>
+                <strong>Vietnamese Science Curriculum:</strong> KH1.1 – KH1.2 – COM2 – R4 – W2d — Identify and describe human growth stages and practice scientific English vocabulary.<br>
+                <strong>Cross-Cutting Concept:</strong> Patterns — Students identify recurring patterns of change across human developmental stages.
+            </span>
+        </div>
+        <div class="cell full">
+            <span class="label">Target InTASC Standard(s)</span>
+            <span class="value">
+                <strong>InTASC 1</strong> (Learner Development) — Understanding developmental stages.<br>
+                <strong>InTASC 2</strong> (Learning Differences) — Differentiation for ELL/diverse learners.<br>
+                <strong>InTASC 3</strong> (Learning Environments) — Collaborative, student-centered classroom.<br>
+                <strong>InTASC 5</strong> (Application of Content) — Using science content with real-world connections.<br>
+                <strong>InTASC 8</strong> (Instructional Strategies) — IBL, PBL, Kagan structures, UDL.
+            </span>
+        </div>
+    </div>
+
+    <!-- Learning Objectives -->
+    <h2>3. Learning Objectives (Bloom's Taxonomy — Backward Design)</h2>
+    <p style="font-size: 13px; color: var(--muted); margin-bottom: 15px;">By the end of this lesson, students will be able to:</p>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 140px;">Bloom's Level</th>
+                <th>Learning Objective</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="bloom-tag bloom-remember">REMEMBER</span></td>
+                <td>
+                    <strong>1.</strong> List the four main stages of human development: infancy, childhood, adolescence, and adulthood.<br>
+                    <strong>2.</strong> Recall the English terms and pronunciations for vocabulary words (foetus, toddler, puberty, adolescence, infancy, childhood, adulthood, elderly, teenager).
+                </td>
+            </tr>
+            <tr>
+                <td><span class="bloom-tag bloom-understand">UNDERSTAND</span></td>
+                <td>
+                    <strong>3.</strong> Identify the correct life stage corresponding to specific age ranges (e.g., 0–1 year = infancy).<br>
+                    <strong>4.</strong> Explain the difference between <em>physical changes</em> (to the body) and <em>mental changes</em> (to how the brain works).
+                </td>
+            </tr>
+            <tr>
+                <td><span class="bloom-tag bloom-apply">APPLY</span></td>
+                <td><strong>5.</strong> Classify people into the correct developmental stage based on visual cues or written descriptions (e.g., "Mason is 8 → Childhood").</td>
+            </tr>
+            <tr>
+                <td><span class="bloom-tag bloom-analyze">ANALYZE</span></td>
+                <td><strong>6.</strong> Organize the stages of human growth into the correct chronological order, from baby to elderly, justifying the sequence.</td>
+            </tr>
+            <tr>
+                <td><span class="bloom-tag bloom-evaluate">EVALUATE</span></td>
+                <td><strong>7.</strong> Assess whether given statements about human development are true or false based on reading comprehension, <strong>citing specific text evidence</strong> to defend their claim.</td>
+            </tr>
+            <tr>
+                <td><span class="bloom-tag bloom-create">CREATE</span></td>
+                <td><strong>8.</strong> Formulate predictions about how their own body and mind will develop over the next ten years, distinguishing between predicted physical and mental changes.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Formative Assessments -->
+    <h2>4. Formative Assessments</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Objective(s) Assessed</th>
+                <th>Assessment Type</th>
+                <th>Description</th>
+                <th>Data Usage & Adaptive Scaffolding</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="bloom-tag bloom-remember">REM</span> <span class="bloom-tag bloom-analyze">ANL</span></td>
+                <td>Concept Sort (Collaborative)</td>
+                <td>Students physically sort vocabulary cards into chronological order, matching terms to age ranges and images.</td>
+                <td><strong>Scaffold:</strong> If struggling, provide visual icons next to terms and pre-grouped age ranges. Teacher circulates to catch misconceptions early.</td>
+            </tr>
+            <tr>
+                <td><span class="bloom-tag bloom-understand">UND</span> <span class="bloom-tag bloom-apply">APP</span></td>
+                <td>RallyRobin Classification</td>
+                <td>Partners take turns classifying projected scenarios (images + text) into life stages, identifying physical vs. mental traits.</td>
+                <td><strong>Scaffold:</strong> Provide bilingual glossary cheat-sheet for A2 learners. Model first scenario as "We Do."</td>
+            </tr>
+            <tr>
+                <td><span class="bloom-tag bloom-evaluate">EVL</span></td>
+                <td>Claim & Defend (T/F)</td>
+                <td>Students evaluate T/F statements using the textbook passage (p. 40), underlining the exact sentence that proves their answer.</td>
+                <td><strong>Scaffold:</strong> Highlight key paragraphs in the text. Provide sentence frame: "This is [true/false] because the text says '______'."</td>
+            </tr>
+            <tr>
+                <td><span class="bloom-tag bloom-create">CRE</span></td>
+                <td>Mini-PBL: "Future Me" Profile</td>
+                <td>Students create a profile predicting 2 physical and 2 mental changes over 10 years. Choice of writing, drawing, or audio recording.</td>
+                <td><strong>Scaffold:</strong> Sentence starters provided (e.g., "In ten years, my body will..." / "In ten years, my brain will..."). Graphic organizer template.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Big Ideas & Vocabulary -->
+    <h2>5. Big Ideas, Vocabulary & Prior Knowledge</h2>
+    <div class="meta-grid">
+        <div class="cell">
+            <span class="label">Big Ideas / Essential Questions</span>
+            <span class="value">
+                <strong>Big Idea:</strong> Growing up involves both visible (physical) and invisible (mental) changes that follow predictable patterns but vary by individual.<br><br>
+                <strong>Provoking Question:</strong> <em>"If your body stops growing taller when you are an adult, do you stop developing?"</em><br><br>
+                <strong>Guiding Questions:</strong>
+                <ul>
+                    <li>How is a toddler different from an adolescent?</li>
+                    <li>What changes will happen to you in the next 10 years?</li>
+                    <li>Can you name changes you can <em>see</em> vs. changes you can't?</li>
+                </ul>
+            </span>
+        </div>
+        <div class="cell">
+            <span class="label">Target Academic Language & Vocabulary</span>
+            <span class="value">
+                <strong>Tier 3 Science Terms:</strong><br>
+                Foetus /ˈfiː.təs/ • Infancy /ˈɪn.fən.si/ • Toddler /ˈtɒd.lər/ • Childhood /ˈtʃaɪld.hʊd/ • Adolescence /ˌæd.əˈles.əns/ • Puberty /ˈpjuː.bə.ti/ • Teenager /ˈtiːn.eɪ.dʒər/ • Adulthood /ˈæd.ʌlt.hʊd/ • Elderly /ˈel.də.li/<br><br>
+                <strong>Tier 2 Academic Terms:</strong><br>
+                Development, physical changes, mental changes, stage, growth, lifecycle
+            </span>
+        </div>
+        <div class="cell">
+            <span class="label">Prior Knowledge Required</span>
+            <span class="value">
+                <ul>
+                    <li>Basic family/age vocabulary (baby, child, adult, old person)</li>
+                    <li>Concept of growing up from personal experience</li>
+                    <li>Basic ability to read short English passages (A2 level)</li>
+                    <li>Experience with pair/group work protocols</li>
+                </ul>
+            </span>
+        </div>
+        <div class="cell">
+            <span class="label">Anticipated Student Misconceptions</span>
+            <span class="value">
+                <div class="misconception-box">
+                    <strong>Misconception 1:</strong> "Development only means getting taller/bigger."<br>
+                    <em>Correction:</em> Explicitly teach and contrast physical vs. mental/cognitive changes throughout the lesson.
+                </div>
+                <div class="misconception-box">
+                    <strong>Misconception 2:</strong> "Puberty happens at the exact same age for everyone."<br>
+                    <em>Correction:</em> Emphasize that adolescence and puberty have a <em>range</em> (usually 12–19) and vary by individual.
+                </div>
+                <div class="misconception-box">
+                    <strong>Misconception 3:</strong> "Elderly people stop developing."<br>
+                    <em>Correction:</em> Highlight that mental development (wisdom, learning) continues throughout life.
+                </div>
+            </span>
+        </div>
+    </div>
+
+    <!-- Learning Theories -->
+    <h2>6. Learning Theories</h2>
+    <div class="meta-grid">
+        <div class="cell full">
+            <span class="label">Selected Learning Theories & How They Guide This Lesson</span>
+            <span class="value">
+                <span class="badge badge-ibl">Constructivism (Piaget)</span>
+                <span class="badge badge-pbl">Social Constructivism (Vygotsky)</span>
+                <span class="badge badge-udl">Cognitive Load Theory (Sweller)</span>
+                <span class="badge badge-thinking">Inquiry-Based Learning</span>
+                <br><br>
+                <strong>Constructivism (Piaget):</strong> Students build on existing schemas about aging (they know "baby" and "old person") by accommodating new, specific scientific terms into their understanding. The Concept Sort activity requires active construction of knowledge rather than passive reception, aligning with Piaget's emphasis on schema construction through assimilation and accommodation.<br><br>
+                <strong>Social Constructivism (Vygotsky):</strong> Collaborative activities (RallyRobin, Concept Sort, group sharing) operate within the Zone of Proximal Development (ZPD). Peer interaction allows A2 learners to achieve classification and evaluation tasks they could not accomplish independently. The structured Kagan protocols ensure equitable participation and scaffold social learning.<br><br>
+                <strong>Cognitive Load Theory (Sweller):</strong> Given A2 English constraints, the lesson minimizes extraneous cognitive load by presenting vocabulary visually with paired images, using minimal on-slide text, and scaffolding progressively through Bloom's levels. The physical/mental distinction uses consistent color coding to reduce split-attention effects.<br><br>
+                <strong>Inquiry-Based Learning (IBL):</strong> The See-Think-Wonder thinking routine transforms students from passive recipients into active questioners. By generating their own wonderings about human development before receiving instruction, students develop intrinsic motivation and ownership of learning.
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- ===== PAGE 2 ===== -->
+<div class="page">
+    <!-- TABLE 2: Differentiation -->
+    <h2>7. Student Diversity & Differentiation of Instruction</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 120px;">Group</th>
+                <th style="width: 140px;">Group Diversity</th>
+                <th>Differentiation of Instruction</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Group A (6 students)</td>
+                <td>Lower-proficiency ELL (A1–A2 border)</td>
+                <td>
+                    <span class="badge badge-diff">Scaffolding</span>
+                    <ul>
+                        <li>Provide bilingual (English/Vietnamese) vocabulary cards with images for the Concept Sort.</li>
+                        <li>Sentence frames for all production tasks: <em>"A [vocabulary word] is a person who is [age] years old."</em></li>
+                        <li>Pair with stronger English peers (strategic heterogeneous pairing).</li>
+                        <li>Pre-highlight key sentences in the reading passage for the T/F evaluation task.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Group B (14 students)</td>
+                <td>On-level A2 learners</td>
+                <td>
+                    <span class="badge badge-udl">Standard Path</span>
+                    <ul>
+                        <li>Full participation in all activities as designed.</li>
+                        <li>Access to vocabulary cards (English only) with images.</li>
+                        <li>Expected to write original sentences and complete T/F with text evidence independently.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Group C (4 students)</td>
+                <td>Advanced / Fast finishers</td>
+                <td>
+                    <span class="badge badge-thinking">Extension</span>
+                    <ul>
+                        <li>Extension challenge during Concept Sort: Add the "Fetal" stage and justify its placement before infancy.</li>
+                        <li>During "Future Me" PBL: Add a third category of <em>social/emotional changes</em> to their predictions.</li>
+                        <li>Peer tutoring role during collaborative activities — explain concepts to Group A in simplified English.</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- UDL Framework -->
+    <h2>8. Universal Design for Learning (UDL)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>UDL Principle</th>
+                <th>Implementation in This Lesson</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Multiple Means of Representation</strong></td>
+                <td>
+                    <ul>
+                        <li>Time-lapse aging video (visual/auditory)</li>
+                        <li>Textbook passage with printed definitions (text)</li>
+                        <li>Color-coded physical vs. mental change system (visual scaffold)</li>
+                        <li>Vocabulary cards with images + pronunciation guides (multimodal)</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Multiple Means of Engagement</strong></td>
+                <td>
+                    <ul>
+                        <li>See-Think-Wonder hook generates student curiosity and ownership</li>
+                        <li>Kagan RallyRobin protocol ensures equal participation and lowers affective filter</li>
+                        <li>Choice in PBL output format (write, draw, or record audio)</li>
+                        <li>Relevance: "Future Me" connects scientific content to students' personal identity</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Multiple Means of Action & Expression</strong></td>
+                <td>
+                    <ul>
+                        <li>Physical card sorting (kinesthetic expression)</li>
+                        <li>Verbal partner discussions (oral expression)</li>
+                        <li>Written T/F with text evidence (literacy expression)</li>
+                        <li>Choice board for "Future Me": write, draw labeled diagrams, or record 30-sec audio clips</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- TABLE 3: Activity Timeline -->
+    <h2>9. Teaching Strategies & Activity Timeline</h2>
+    <p style="font-size: 12px; color: var(--muted); margin-bottom: 15px;">
+        <span class="badge badge-ibl">IBL</span>
+        <span class="badge badge-pbl">PBL</span>
+        <span class="badge badge-udl">UDL</span>
+        <span class="badge badge-diff">Differentiation</span>
+        <span class="badge badge-thinking">Thinking Routine</span>
+        <span class="badge badge-kagan">Kagan Structure</span>
+        &nbsp; | &nbsp; <span class="ido">I Do</span> &nbsp; <span class="wedo">We Do</span> &nbsp; <span class="youdo">You Do</span>
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 55px;">Min</th>
+                <th style="width: 180px;">Activity & Pedagogy</th>
+                <th>Detailed Description</th>
+                <th style="width: 80px;">Mode</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>0–3</strong></td>
+                <td>Class Administration</td>
+                <td>
+                    Take attendance and note absent students. Establish class rules (English-only, respect, active listening). Display the lesson title slide on projector.<br>
+                    <div class="note-box">📋 <strong>Classroom Management:</strong> Use a visible "Noise-O-Meter" chart to signal acceptable voice levels throughout the lesson.</div>
+                </td>
+                <td><span class="ido">I Do</span></td>
+            </tr>
+            <tr>
+                <td><strong>3–8</strong></td>
+                <td>Hook: See-Think-Wonder<br>
+                    <span class="badge badge-ibl">IBL</span>
+                    <span class="badge badge-thinking">Thinking Routine</span>
+                </td>
+                <td>
+                    <strong>Provocation:</strong> Project a 60-second time-lapse aging video (person aging 0 → 70 years). Students watch silently.<br><br>
+                    <strong>Thinking Routine:</strong><br>
+                    <em>"What do you <strong>see</strong> changing?"</em> (Physical observations)<br>
+                    <em>"What do you <strong>think</strong> is changing inside their brain?"</em> (Mental inference)<br>
+                    <em>"What do you <strong>wonder</strong> about growing older?"</em> (Student-generated inquiry questions)<br><br>
+                    Record 3–4 student wonders on the board. Revisit at lesson close.<br>
+                    <strong>State learning objectives</strong> immediately after (Slide 3).
+                    <div class="note-box">🔑 <strong>IBL Connection:</strong> Student-generated questions drive subsequent instruction. This transforms the lesson from teacher-telling to student-discovering.</div>
+                </td>
+                <td><span class="ido">I Do</span> → <span class="wedo">We Do</span></td>
+            </tr>
+            <tr>
+                <td><strong>8–20</strong></td>
+                <td>Discovery & Concept Sort<br>
+                    <span class="badge badge-ibl">IBL</span>
+                    <span class="badge badge-diff">Differentiation</span>
+                    <span class="badge badge-udl">UDL</span>
+                </td>
+                <td>
+                    <strong>Vocabulary Introduction (4 min, I Do):</strong> Present 9 terms using vocabulary slides (Slides 4–6). Model pronunciation for each term. Students choral repeat, then individual spot-checks.<br><br>
+                    <strong>Key Distinction (2 min):</strong> Explicitly teach physical vs. mental changes using the split visual (Slide 4). Address <strong>Misconception 1</strong> directly: "Development is NOT just getting bigger."<br><br>
+                    <strong>Concept Sort (6 min, We Do → You Do):</strong> Distribute card sets (9 vocab words, 9 images, 9 age ranges) to groups of 4. Instead of giving definitions, students <strong>analyze and logically group</strong> the cards by matching terms to ages and images, then arrange in chronological order.<br>
+                    Teacher circulates to monitor, probe with guiding questions, and correct.<br>
+                    <div class="note-box">🔀 <strong>Tech Integration:</strong> If interactive whiteboard available, one group completes the Concept Sort digitally on the board while others use physical cards.</div>
+                    <div class="misconception-box">⚠️ <strong>Misconception Check:</strong> Watch for students placing "Puberty" as a separate stage rather than a process within Adolescence. Address by saying: "Puberty is not a stage—it's something that <em>happens during</em> adolescence."</div>
+                </td>
+                <td><span class="ido">I Do</span> → <span class="wedo">We Do</span> → <span class="youdo">You Do</span></td>
+            </tr>
+            <tr>
+                <td><strong>20–30</strong></td>
+                <td>Application: RallyRobin<br>
+                    <span class="badge badge-kagan">Kagan Structure</span>
+                    <span class="badge badge-diff">Differentiation</span>
+                </td>
+                <td>
+                    <strong>Classify & Apply (Slide 7):</strong> Project real-world scenarios (e.g., "Mason is 8, goes to school, has lots of energy" / "Hannah is married with 3 children, works as a teacher").<br><br>
+                    <strong>RallyRobin Protocol:</strong> Partners take turns:<br>
+                    Partner A classifies the person's life stage → Partner B states whether the description highlights a physical or mental trait → Switch roles for next scenario.<br><br>
+                    Project 4–5 scenarios of increasing complexity. Final scenario: "Your grandfather is 72, tells amazing stories, but his hair is gray and he walks slowly." Students must identify BOTH physical AND mental traits.<br>
+                    <div class="note-box">👥 <strong>Strategic Pairing:</strong> Group A (lower-proficiency) students paired with Group B/C peers. Provide Group A with a reference glossary during this activity.</div>
+                </td>
+                <td><span class="wedo">We Do</span> → <span class="youdo">You Do</span></td>
+            </tr>
+            <tr>
+                <td><strong>30–40</strong></td>
+                <td>Evaluation: Claim & Defend<br>
+                    <span class="badge badge-thinking">Critical Thinking</span>
+                </td>
+                <td>
+                    <strong>Reading Comprehension (Slide 8):</strong> Students independently read the "Human Development" passage (textbook p. 40).<br><br>
+                    <strong>T/F Evaluation with Evidence:</strong><br>
+                    1. "Babies don't look like their parents." — T / F<br>
+                    2. "Physical changes are changes to our bodies." — T / F<br>
+                    3. "Babies need to learn how to feed themselves." — T / F<br>
+                    4. "Children's brains work the same way as a baby's brain." — T / F<br><br>
+                    <strong>Higher-Order Requirement:</strong> Students must <strong>underline the exact sentence</strong> in the text that proves their T/F answer. This pushes beyond simple recall into evidence-based evaluation.<br><br>
+                    Review answers as whole-class discussion. Call on students to read their evidence aloud.<br>
+                    <div class="note-box">💡 <strong>Discussion Prompt:</strong> "Who found a <em>different</em> sentence to prove their answer? Can you have different evidence for the same answer?"</div>
+                </td>
+                <td><span class="youdo">You Do</span> → <span class="wedo">We Do</span></td>
+            </tr>
+            <tr>
+                <td><strong>40–52</strong></td>
+                <td>Mini-PBL: "Future Me"<br>
+                    <span class="badge badge-pbl">PBL</span>
+                    <span class="badge badge-udl">UDL</span>
+                    <span class="badge badge-diff">Differentiation</span>
+                </td>
+                <td>
+                    <strong>Creating (Slide 9):</strong> "You are approximately 10 years old (Childhood). In 10 years, you will be 20 (entering Adulthood). What will change?"<br><br>
+                    <strong>Task:</strong> Using the "Future Me" graphic organizer, formulate predictions:<br>
+                    • Write/Draw <strong>2 physical changes</strong> ("How will your body look different?")<br>
+                    • Write/Draw <strong>2 mental changes</strong> ("How will your brain think differently?")<br><br>
+                    <strong>UDL Choice Board:</strong><br>
+                    Option A: Written profile with sentence starters<br>
+                    Option B: Labeled illustration/diagram<br>
+                    Option C: 30-second audio recording describing predictions<br><br>
+                    <strong>Share (3 min):</strong> 2–3 volunteers present their "Future Me" to the class. Class applauds.<br>
+                    <div class="note-box">🎯 <strong>Extension (Group C):</strong> Add a third category — <em>social/emotional changes</em> (e.g., "I will care about...").</div>
+                </td>
+                <td><span class="youdo">You Do</span></td>
+            </tr>
+            <tr>
+                <td><strong>52–55</strong></td>
+                <td>Closure & Review</td>
+                <td>
+                    <strong>Revisit Wonders:</strong> Return to the student wonders recorded from the hook. "Can we answer any of these now?"<br><br>
+                    <strong>Exit Ticket (verbal):</strong> Cold-call 3 students: "Name one physical change and one mental change that happens during adolescence."<br><br>
+                    <strong>Assign Homework:</strong> Complete "Talk and Write About It" (Q1–4, p. 37). Announce vocabulary spelling bee for next class (Slide 10).
+                </td>
+                <td><span class="wedo">We Do</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ===== PAGE 3 ===== -->
+<div class="page">
+    <!-- TABLE 4: 21st Century Skills -->
+    <h2>10. 21st Century Knowledge & Skills (5C's)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>21st Century Skill</th>
+                <th>Teaching Strategies / Activities</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Critical Thinking</strong></td>
+                <td>See-Think-Wonder routine (generating scientific observations and inferences); Claim & Defend T/F evaluation (evidence-based reasoning); Concept Sort (analyzing and organizing information logically).</td>
+            </tr>
+            <tr>
+                <td><strong>Communication</strong></td>
+                <td>Choral and individual pronunciation practice; RallyRobin partner verbalization; "Future Me" class presentation sharing; discussion of text evidence.</td>
+            </tr>
+            <tr>
+                <td><strong>Collaboration</strong></td>
+                <td>Kagan RallyRobin structured partner work; group Concept Sort activity; peer review during "Future Me" creation; strategic heterogeneous pairing.</td>
+            </tr>
+            <tr>
+                <td><strong>Creativity</strong></td>
+                <td>Mini-PBL "Future Me" — students synthesize scientific knowledge into personal creative predictions using writing, drawing, or audio. Open-ended product with no single "correct" answer.</td>
+            </tr>
+            <tr>
+                <td><strong>Citizenship</strong></td>
+                <td>Respectful active listening during peer sharing; English-only classroom agreement; understanding human diversity in developmental timelines (not everyone develops at the same age).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- TABLE 5: Science & Engineering Practices -->
+    <h2>11. Science & Engineering Practices (SEPs)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Science & Engineering Practice</th>
+                <th>Teaching Strategies / Activities</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Asking Questions & Defining Problems</strong></td>
+                <td>See-Think-Wonder routine — students generate scientific questions about human development after observing the time-lapse video provocation.</td>
+            </tr>
+            <tr>
+                <td><strong>Developing & Using Models</strong></td>
+                <td>Concept Sort cards serve as a physical model of the human lifecycle sequence. Students arrange, rearrange, and justify their model.</td>
+            </tr>
+            <tr>
+                <td><strong>Analyzing & Interpreting Data</strong></td>
+                <td>Students analyze age ranges, visual descriptions, and textbook data to classify individuals into developmental stages (RallyRobin).</td>
+            </tr>
+            <tr>
+                <td><strong>Engaging in Argument from Evidence</strong></td>
+                <td>Claim & Defend T/F — students must cite specific textual evidence to support or refute claims about human development. Class discussion of conflicting evidence.</td>
+            </tr>
+            <tr>
+                <td><strong>Obtaining, Evaluating & Communicating Information</strong></td>
+                <td>Students read scientific text, extract developmental data, construct original sentences, and communicate predictions via the "Future Me" PBL product.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- TABLE 6: Review -->
+    <h2>12. Review</h2>
+    <table>
+        <thead>
+            <tr><th>Review Strategy</th><th>Details</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Homework</strong></td>
+                <td>Complete "Talk and Write About It" (Q1–4, p. 37 of Natural Science Supplementary Book). Students must fill in the blanks identifying life stages by age range.</td>
+            </tr>
+            <tr>
+                <td><strong>Entry Ticket / Warm-Up (Next Class)</strong></td>
+                <td>Vocabulary Spelling Bee — students will be quizzed on spelling and pronunciation of the 9 key terms. Top spellers earn classroom recognition.</td>
+            </tr>
+            <tr>
+                <td><strong>Spiral Review</strong></td>
+                <td>"Future Me" profiles will be revisited in the unit assessment. Students will compare their predictions with scientific research on adolescent development.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- TABLE 7: Thinking Ahead -->
+    <h2>13. Thinking Ahead</h2>
+    <table>
+        <thead>
+            <tr><th>Consideration</th><th>Plan</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Next Lesson Connection</strong></td>
+                <td>Lesson 20 will build on adolescence/puberty with a deeper dive into the body systems involved in growth (hormones, nutrition). The vocabulary acquired today is foundational for this progression.</td>
+            </tr>
+            <tr>
+                <td><strong>Formative Data Usage</strong></td>
+                <td>If >30% of students misclassify stages during the Concept Sort, begin next lesson with a 5-minute remediation warm-up using a digital matching game before introducing new content.</td>
+            </tr>
+            <tr>
+                <td><strong>Long-Term PBL</strong></td>
+                <td>"Future Me" profiles can evolve into a unit-long portfolio project where students add to their predictions after each lesson (nutrition, hygiene, mental health).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- TABLE 8: Materials -->
+    <h2>14. Necessary Materials, Technology & Websites</h2>
+    <table>
+        <thead>
+            <tr><th>Category</th><th>Items</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Printed Materials</strong></td>
+                <td>
+                    <ul>
+                        <li>Natural Science Supplementary Book (pages 36–40) — 24 copies</li>
+                        <li>Card sorting sets: 6 sets × (9 vocab cards + 9 image cards + 9 age range cards) = 162 cards</li>
+                        <li>"Future Me" graphic organizer template — 24 copies</li>
+                        <li>Bilingual vocabulary reference sheet (for Group A) — 6 copies</li>
+                        <li>Sentence frame handouts (for Group A) — 6 copies</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Technology</strong></td>
+                <td>
+                    <ul>
+                        <li>Projector / Smartboard (Room M210)</li>
+                        <li>Laptop/tablet with lesson slides loaded (Human_Growth_Slides.html)</li>
+                        <li>Time-lapse aging video (pre-downloaded or YouTube link with offline backup)</li>
+                        <li>Digital timer (projected for activity pacing)</li>
+                        <li>Optional: Interactive whiteboard for digital Concept Sort</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Classroom Setup</strong></td>
+                <td>
+                    <ul>
+                        <li>Tables arranged in groups of 4 (6 groups of 4 students)</li>
+                        <li>"Noise-O-Meter" chart visible on wall</li>
+                        <li>Whiteboard section reserved for recording student "Wonders"</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- TABLE 9: References -->
+    <h2>15. References</h2>
+    <table>
+        <thead>
+            <tr><th>Source</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Anderson, L.W., & Krathwohl, D.R. (Eds.) (2001). <em>A taxonomy for learning, teaching, and assessing: A revision of Bloom's taxonomy of educational objectives.</em> New York: Longman.</td></tr>
+            <tr><td>Bloom, B. S. (1956). <em>Taxonomy of educational objectives: The classification of educational goals.</em> New York: David McKay Company.</td></tr>
+            <tr><td>CAST (2018). <em>Universal Design for Learning Guidelines version 2.2.</em> Retrieved from https://udlguidelines.cast.org</td></tr>
+            <tr><td>Kagan, S. & Kagan, M. (2009). <em>Kagan Cooperative Learning.</em> San Clemente, CA: Kagan Publishing.</td></tr>
+            <tr><td>Miller, A. (2018). Planning for PBL Implementation. <em>Edutopia.</em> George Lucas Educational Foundation.</td></tr>
+            <tr><td>Shabatura, J. (2022). Using Bloom's Taxonomy to Write Effective Learning Objectives. <em>University of Arkansas TIPS.</em></td></tr>
+            <tr><td>Sweller, J. (1988). Cognitive load during problem solving: Effects on learning. <em>Cognitive Science, 12</em>(2), 257–285.</td></tr>
+            <tr><td>Wiggins, G. P., & McTighe, J. (2005). <em>Understanding by design.</em> Alexandria, VA: ASCD.</td></tr>
+            <tr><td>Natural Science Supplementary Materials, Grade 5 (Vietnamese bilingual curriculum). Lesson 19: Human Growth & Development, pp. 36–40.</td></tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p>Moreland Science Lesson Plan Template — Completed by Victor | Tuesday, 7 April 2026 | Grade 5H2</p>
+        <p style="margin: 0;">Designed using Backward Design (Wiggins & McTighe) • Bloom's Taxonomy (Anderson & Krathwohl) • UDL (CAST) • Kagan Structures</p>
+    </div>
+</div>
+
+</body>
+</html>

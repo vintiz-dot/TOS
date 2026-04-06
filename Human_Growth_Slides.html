@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human Growth & Development — Grade 5 Science</title>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--green:#dcfd8b;--purple:#bc84ee;--cyan:#8be8fd;--orange:#ff823a;--peach:#fdd5bd;--dark:#1e293b;--slide-w:1280px;--slide-h:720px}
+body{background:#0f172a;font-family:'Inter',sans-serif;overflow:hidden;height:100vh;display:flex;align-items:center;justify-content:center}
+.deck{position:relative;width:var(--slide-w);height:var(--slide-h)}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 60px;border-radius:16px;opacity:0;transform:scale(.96);transition:opacity .5s,transform .5s;pointer-events:none;overflow:hidden}
+.slide.active{opacity:1;transform:scale(1);pointer-events:auto;z-index:10}
+.slide>*{position:relative;z-index:1}
+h1,h2,.title{font-family:'Comfortaa',cursive;color:var(--dark)}
+.slide-title{font-size:44px;font-weight:700;width:100%;text-align:left;margin-bottom:25px}
+.two-col{display:flex;gap:35px;width:100%;flex:1;min-height:0}
+.two-col>div{flex:1;border-radius:32px;padding:35px;display:flex;flex-direction:column;justify-content:center}
+.three-col{display:flex;gap:25px;width:100%;flex:1;min-height:0}
+.three-col>div{flex:1;border-radius:32px;padding:28px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.three-col img{width:100%;height:200px;object-fit:cover;border-radius:18px;margin-bottom:14px}
+.badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;color:#fff;margin:3px 2px}
+.b-rem{background:#ef4444}.b-und{background:#f97316}.b-app{background:#eab308;color:#000}.b-anl{background:#22c55e}.b-evl{background:#3b82f6}.b-cre{background:#8b5cf6}
+nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:100}
+nav button{width:48px;height:48px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:18px;cursor:pointer;backdrop-filter:blur(10px);transition:.2s}
+nav button:hover{background:rgba(255,255,255,.35);transform:scale(1.1)}
+.counter{position:fixed;bottom:28px;right:30px;color:rgba(255,255,255,.5);font-size:14px;z-index:100;font-family:'Inter'}
+.progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--cyan),var(--purple));transition:width .4s;z-index:100}
+ul{padding-left:22px;margin:8px 0}li{margin-bottom:6px;line-height:1.5}
+.emoji{font-size:48px;margin-bottom:12px}
+.card{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border-radius:20px;padding:25px;margin:8px 0}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.float{animation:float 3s ease-in-out infinite}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.slide.active .anim{animation:fadeUp .6s ease forwards}
+.slide.active .anim-d1{animation-delay:.15s;opacity:0}.slide.active .anim-d2{animation-delay:.3s;opacity:0}.slide.active .anim-d3{animation-delay:.45s;opacity:0}.slide.active .anim-d4{animation-delay:.6s;opacity:0}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+<!-- SLIDE 1: TITLE -->
+<div class="slide active" style="background:var(--green)">
+<div style="text-align:center;width:100%">
+<p class="anim" style="font-size:20px;font-weight:600;letter-spacing:2px;color:var(--dark);opacity:.7;margin-bottom:12px">NATURAL SCIENCE 6 — LESSON 19</p>
+<h1 class="anim anim-d1" style="font-size:80px;line-height:1.1;margin-bottom:20px">Human Growth<br>& Development</h1>
+<p class="anim anim-d2" style="font-size:26px;color:var(--dark)">Grade 5H2 · Tuesday 7 April 2026 · Block 2</p>
+<p class="anim anim-d3" style="font-size:18px;color:var(--dark);opacity:.6;margin-top:8px">Teacher Victor · Room M210</p>
+<div class="anim anim-d4" style="margin-top:30px">
+<img src="assets/life-stages.png" alt="Human life stages" style="height:180px;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.12)">
+</div>
+</div>
+</div>
+
+<!-- SLIDE 2: CLASS ADMIN -->
+<div class="slide" style="background:#f8fafc">
+<h2 class="slide-title anim"><i class="fa-solid fa-clipboard-check" style="color:var(--orange)"></i> Before We Start</h2>
+<div class="two-col">
+<div style="background:var(--peach)" class="anim anim-d1">
+<h3 style="font-family:Comfortaa;font-size:28px;margin-bottom:20px"><i class="fa-solid fa-list-check"></i> Class Admin</h3>
+<ul style="font-size:22px;line-height:1.8">
+<li>📋 Attendance check</li>
+<li>🗣️ English-only rule today!</li>
+<li>👂 Listen when others speak</li>
+<li>✋ Raise your hand to share</li>
+<li>🤝 Be kind to your partner</li>
+</ul>
+</div>
+<div style="background:var(--cyan)" class="anim anim-d2">
+<h3 style="font-family:Comfortaa;font-size:28px;margin-bottom:20px"><i class="fa-solid fa-bullseye"></i> Today's Mission</h3>
+<p style="font-size:20px;line-height:1.7">Today we will explore how humans grow and change from babies to elderly. You will:</p>
+<ul style="font-size:20px;line-height:1.7;margin-top:10px">
+<li>Learn 9 new science words</li>
+<li>Discover physical AND mental changes</li>
+<li>Predict YOUR future!</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 3: SEE-THINK-WONDER -->
+<div class="slide" style="background:#f8fafc">
+<h2 class="slide-title anim"><i class="fa-solid fa-eye" style="color:var(--purple)"></i> See · Think · Wonder</h2>
+<div class="two-col">
+<div style="background:var(--peach);text-align:center" class="anim anim-d1">
+<p class="emoji float">🎬</p>
+<h3 style="font-family:Comfortaa;font-size:30px;margin-bottom:15px">Watch the Video!</h3>
+<p style="font-size:20px;line-height:1.6;margin-bottom:15px">Watch a person grow from a baby to 70 years old in 60 seconds.</p>
+<p style="font-size:16px;font-style:italic;opacity:.7">Watch silently. Think carefully.</p>
+</div>
+<div style="background:var(--purple);color:#fff" class="anim anim-d2">
+<div style="margin-bottom:20px">
+<p style="font-size:26px;font-weight:700;margin-bottom:8px">👁️ SEE</p>
+<p style="font-size:20px">"What visual changes do you <em>notice</em>?"</p>
+</div>
+<div style="margin-bottom:20px">
+<p style="font-size:26px;font-weight:700;margin-bottom:8px">🧠 THINK</p>
+<p style="font-size:20px">"What do you think is changing <em>inside</em> their brain?"</p>
+</div>
+<div>
+<p style="font-size:26px;font-weight:700;margin-bottom:8px">❓ WONDER</p>
+<p style="font-size:20px">"What questions do you <em>wonder</em> about growing older?"</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 4: LEARNING TARGETS -->
+<div class="slide" style="background:#f8fafc">
+<h2 class="slide-title anim"><i class="fa-solid fa-crosshairs" style="color:#3b82f6"></i> Our Learning Targets</h2>
+<div style="background:var(--cyan);border-radius:32px;padding:40px;width:100%" class="anim anim-d1">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+<div class="card"><span class="badge b-rem">REMEMBER</span><p style="font-size:20px;margin-top:8px">List the 4 main stages of human development & recall 9 vocabulary terms.</p></div>
+<div class="card"><span class="badge b-und">UNDERSTAND</span><p style="font-size:20px;margin-top:8px">Explain the difference between physical (body) and mental (brain) changes.</p></div>
+<div class="card"><span class="badge b-app">APPLY</span> <span class="badge b-anl">ANALYZE</span><p style="font-size:20px;margin-top:8px">Classify people into life stages & organize stages in chronological order.</p></div>
+<div class="card"><span class="badge b-evl">EVALUATE</span> <span class="badge b-cre">CREATE</span><p style="font-size:20px;margin-top:8px">Assess T/F statements with evidence & predict YOUR future development!</p></div>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 5: PHYSICAL vs MENTAL -->
+<div class="slide" style="background:#f8fafc">
+<h2 class="slide-title anim"><i class="fa-solid fa-arrows-left-right" style="color:var(--orange)"></i> Two Types of Changes</h2>
+<div class="two-col">
+<div style="background:var(--green)" class="anim anim-d1">
+<h3 style="font-family:Comfortaa;font-size:36px;text-align:center;margin-bottom:15px"><i class="fa-solid fa-child-reaching"></i> Physical</h3>
+<p style="font-size:22px;text-align:center;margin-bottom:18px">Changes you can <strong>see</strong> on the outside</p>
+<ul style="font-size:22px;line-height:1.7">
+<li>Growing taller & heavier</li>
+<li>Learning to walk and run</li>
+<li>Hair color changing with age</li>
+<li>Muscles getting stronger</li>
+</ul>
+</div>
+<div style="background:var(--purple);color:#fff" class="anim anim-d2">
+<h3 style="font-family:Comfortaa;font-size:36px;text-align:center;margin-bottom:15px;color:#fff"><i class="fa-solid fa-brain"></i> Mental</h3>
+<p style="font-size:22px;text-align:center;margin-bottom:18px">Changes happening <strong>inside</strong> the brain</p>
+<ul style="font-size:22px;line-height:1.7">
+<li>Learning how to speak</li>
+<li>Solving harder problems</li>
+<li>Understanding your feelings</li>
+<li>Making smart decisions</li>
+</ul>
+</div>
+</div>
+<p class="anim anim-d3" style="font-size:16px;color:#64748b;margin-top:12px;text-align:center;width:100%">⚠️ Remember: Development is NOT just getting bigger — your brain changes too!</p>
+</div>
+
+<!-- SLIDE 6: VOCABULARY -->
+<div class="slide" style="background:var(--green)">
+<h2 class="slide-title anim" style="margin-bottom:15px"><i class="fa-solid fa-spell-check"></i> Key Vocabulary</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%" class="anim anim-d1">
+<div class="card" style="background:#fff;text-align:center;padding:16px"><p style="font-size:13px;color:var(--orange);font-weight:700">0–9 MONTHS</p><p style="font-size:24px;font-weight:700">Foetus</p><p style="font-size:14px;color:#64748b">/ˈfiː.təs/ · Bào thai</p></div>
+<div class="card" style="background:#fff;text-align:center;padding:16px"><p style="font-size:13px;color:var(--orange);font-weight:700">0–1 YEAR</p><p style="font-size:24px;font-weight:700">Infancy</p><p style="font-size:14px;color:#64748b">/ˈɪn.fən.si/ · Sơ sinh</p></div>
+<div class="card" style="background:#fff;text-align:center;padding:16px"><p style="font-size:13px;color:var(--orange);font-weight:700">1–3 YEARS</p><p style="font-size:24px;font-weight:700">Toddler</p><p style="font-size:14px;color:#64748b">/ˈtɒd.lər/ · Trẻ tập đi</p></div>
+<div class="card" style="background:#fff;text-align:center;padding:16px"><p style="font-size:13px;color:#22c55e;font-weight:700">1–12 YEARS</p><p style="font-size:24px;font-weight:700">Childhood</p><p style="font-size:14px;color:#64748b">/ˈtʃaɪld.hʊd/ · Thời niên thiếu</p></div>
+<div class="card" style="background:#fff;text-align:center;padding:16px"><p style="font-size:13px;color:#22c55e;font-weight:700">12–19 YEARS</p><p style="font-size:24px;font-weight:700">Adolescence</p><p style="font-size:14px;color:#64748b">/ˌæd.əˈles.əns/ · Vị thành niên</p></div>
+<div class="card" style="background:#fff;text-align:center;padding:16px"><p style="font-size:13px;color:#22c55e;font-weight:700">~13–19 YEARS</p><p style="font-size:24px;font-weight:700">Puberty</p><p style="font-size:14px;color:#64748b">/ˈpjuː.bə.ti/ · Tuổi dậy thì</p></div>
+<div class="card" style="background:#fff;text-align:center;padding:16px"><p style="font-size:13px;color:#3b82f6;font-weight:700">13–19 YEARS</p><p style="font-size:24px;font-weight:700">Teenager</p><p style="font-size:14px;color:#64748b">/ˈtiːn.eɪ.dʒər/ · Thanh thiếu niên</p></div>
+<div class="card" style="background:#fff;text-align:center;padding:16px"><p style="font-size:13px;color:#3b82f6;font-weight:700">20–65 YEARS</p><p style="font-size:24px;font-weight:700">Adulthood</p><p style="font-size:14px;color:#64748b">/ˈæd.ʌlt.hʊd/ · Trưởng thành</p></div>
+<div class="card" style="background:#fff;text-align:center;padding:16px"><p style="font-size:13px;color:#3b82f6;font-weight:700">65+ YEARS</p><p style="font-size:24px;font-weight:700">Elderly</p><p style="font-size:14px;color:#64748b">/ˈel.də.li/ · Người cao tuổi</p></div>
+</div>
+</div>
+
+<!-- SLIDE 7: EARLY STAGES -->
+<div class="slide" style="background:#f8fafc">
+<h2 class="slide-title anim"><i class="fa-solid fa-seedling" style="color:#22c55e"></i> The Early Years</h2>
+<div class="three-col">
+<div style="background:var(--peach)" class="anim anim-d1">
+<p class="emoji">👶</p>
+<h3 style="font-family:Comfortaa;font-size:26px;margin-bottom:8px">Infancy</h3>
+<p style="font-size:20px;font-weight:700;color:var(--orange)">0 – 1 Year</p>
+<p style="font-size:17px;margin-top:10px;line-height:1.5">Very dependent on adults. Can breathe and cry but cannot speak yet.</p>
+</div>
+<div style="background:var(--green)" class="anim anim-d2">
+<p class="emoji">🧒</p>
+<h3 style="font-family:Comfortaa;font-size:26px;margin-bottom:8px">Childhood</h3>
+<p style="font-size:20px;font-weight:700;color:#22c55e">1 – 12 Years</p>
+<p style="font-size:17px;margin-top:10px;line-height:1.5">Starts as a toddler. Constantly growing & learning: walking, talking, eating.</p>
+</div>
+<div style="background:var(--purple);color:#fff" class="anim anim-d3">
+<p class="emoji">🧑‍🎓</p>
+<h3 style="font-family:Comfortaa;font-size:26px;margin-bottom:8px;color:#fff">Adolescence</h3>
+<p style="font-size:20px;font-weight:700;color:var(--green)">12 – 19 Years</p>
+<p style="font-size:17px;margin-top:10px;line-height:1.5;color:#fff">Teenagers! Rapid growth. Puberty causes major external & internal changes.</p>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 8: LATER STAGES -->
+<div class="slide" style="background:#f8fafc">
+<h2 class="slide-title anim"><i class="fa-solid fa-tree" style="color:#3b82f6"></i> Growing Up & Beyond</h2>
+<div class="two-col" style="gap:50px;max-height:480px">
+<div style="background:var(--cyan);text-align:center" class="anim anim-d1">
+<p class="emoji" style="font-size:60px">👩‍💼</p>
+<h3 style="font-family:Comfortaa;font-size:34px;margin-bottom:10px">Adulthood</h3>
+<p style="font-size:22px;font-weight:700;color:#0891b2;margin-bottom:15px">20 – 65 Years</p>
+<ul style="font-size:20px;text-align:left;line-height:1.7">
+<li><strong>Young adults:</strong> 20–36 years</li>
+<li><strong>Middle-aged:</strong> 36–55 years</li>
+<li><strong>Older adults:</strong> 55–65 years</li>
+<li>Most independent stage</li>
+<li>Have children of their own</li>
+</ul>
+</div>
+<div style="background:var(--orange);color:#fff;text-align:center" class="anim anim-d2">
+<p class="emoji" style="font-size:60px">👴</p>
+<h3 style="font-family:Comfortaa;font-size:34px;margin-bottom:10px;color:#fff">Elderly</h3>
+<p style="font-size:22px;font-weight:700;color:var(--green);margin-bottom:15px">65+ Years</p>
+<ul style="font-size:20px;text-align:left;line-height:1.7;color:#fff">
+<li>The final stage of human growth</li>
+<li>Hair may turn gray</li>
+<li>Physical strength changes</li>
+<li>Brain keeps learning! (wisdom)</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 9: CONCEPT SORT -->
+<div class="slide" style="background:var(--cyan)">
+<h2 class="slide-title anim"><i class="fa-solid fa-puzzle-piece"></i> Concept Sort Activity</h2>
+<div class="two-col">
+<div style="background:#fff" class="anim anim-d1">
+<h3 style="font-family:Comfortaa;font-size:28px;margin-bottom:15px">📦 Your Card Set</h3>
+<p style="font-size:20px;line-height:1.6;margin-bottom:15px">Each group gets 3 types of cards:</p>
+<ul style="font-size:20px;line-height:1.8">
+<li>🏷️ <strong>9 Vocabulary cards</strong> (terms)</li>
+<li>🖼️ <strong>9 Image cards</strong> (pictures)</li>
+<li>🔢 <strong>9 Age range cards</strong> (numbers)</li>
+</ul>
+<p style="font-size:18px;margin-top:18px;padding:12px;background:var(--green);border-radius:12px"><strong>⏱ Time: 6 minutes</strong></p>
+</div>
+<div style="background:var(--peach)" class="anim anim-d2">
+<h3 style="font-family:Comfortaa;font-size:28px;margin-bottom:15px">🎯 Instructions</h3>
+<ol style="font-size:20px;line-height:1.8;padding-left:20px">
+<li><strong>Match</strong> each term to its image and age range</li>
+<li><strong>Arrange</strong> all cards in chronological order (youngest → oldest)</li>
+<li><strong>Discuss:</strong> "Why did you put them in this order?"</li>
+</ol>
+<div style="margin-top:18px;padding:12px;background:rgba(255,255,255,.5);border-radius:12px">
+<p style="font-size:16px">⚠️ <strong>Careful!</strong> Puberty is NOT a stage — it happens <em>during</em> adolescence!</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 10: RALLYROB IN -->
+<div class="slide" style="background:#f8fafc">
+<h2 class="slide-title anim"><i class="fa-solid fa-people-arrows" style="color:var(--purple)"></i> RallyRobin: Classify!</h2>
+<div class="three-col">
+<div style="background:var(--green);padding:30px" class="anim anim-d1">
+<p class="emoji">🔍</p>
+<h3 style="font-family:Comfortaa;font-size:22px;margin-bottom:10px">Scenario 1</h3>
+<p style="font-size:19px;line-height:1.5">"Mason is <strong>8 years old</strong>. He goes to school and has lots of energy."</p>
+<p style="font-size:18px;font-weight:700;margin-top:12px;color:var(--dark)">Which stage? Physical or mental trait?</p>
+</div>
+<div style="background:var(--purple);color:#fff;padding:30px" class="anim anim-d2">
+<p class="emoji">🔍</p>
+<h3 style="font-family:Comfortaa;font-size:22px;margin-bottom:10px;color:#fff">Scenario 2</h3>
+<p style="font-size:19px;line-height:1.5">"Hannah is <strong>married</strong> with 3 children. She works as a <strong>teacher</strong>."</p>
+<p style="font-size:18px;font-weight:700;margin-top:12px;color:var(--green)">Which stage? Physical or mental trait?</p>
+</div>
+<div style="background:var(--orange);color:#fff;padding:30px" class="anim anim-d3">
+<p class="emoji">💬</p>
+<h3 style="font-family:Comfortaa;font-size:22px;margin-bottom:10px;color:#fff">Your Turn!</h3>
+<p style="font-size:19px;line-height:1.5">"Grandpa is <strong>72</strong>, tells amazing stories, but his hair is <strong>gray</strong>."</p>
+<p style="font-size:18px;font-weight:700;margin-top:12px;color:var(--green)">Find BOTH a physical and mental trait!</p>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 11: CLAIM & DEFEND -->
+<div class="slide" style="background:#f8fafc">
+<h2 class="slide-title anim"><i class="fa-solid fa-shield-halved" style="color:#3b82f6"></i> Evaluate: Claim & Defend</h2>
+<div class="two-col">
+<div style="background:#fff;border:3px solid var(--purple)" class="anim anim-d1">
+<h3 style="font-family:Comfortaa;font-size:26px;color:var(--purple);margin-bottom:18px">True or False?</h3>
+<ol style="font-size:21px;line-height:2;padding-left:20px">
+<li>Babies don't look like their parents.</li>
+<li>Physical changes are changes to our bodies.</li>
+<li>Babies need to learn how to feed themselves.</li>
+<li>Children's brains work the same way as a baby's.</li>
+</ol>
+</div>
+<div style="background:var(--purple);color:#fff" class="anim anim-d2">
+<h3 style="font-family:Comfortaa;font-size:26px;color:#fff;margin-bottom:18px"><i class="fa-solid fa-book-open"></i> The Rule</h3>
+<p style="font-size:20px;line-height:1.6;margin-bottom:18px">Read the "Human Development" text on <strong>page 40</strong> of your book.</p>
+<div style="background:rgba(0,0,0,.15);padding:20px;border-radius:16px">
+<p style="font-size:22px;color:var(--green);line-height:1.5"><strong>You MUST underline</strong> the exact sentence in the text that PROVES your answer is correct!</p>
+</div>
+<p style="font-size:17px;margin-top:15px;font-style:italic;opacity:.8">Sentence frame: "This is [true/false] because the text says '______'."</p>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 12: FUTURE ME PBL -->
+<div class="slide" style="background:var(--green)">
+<h2 class="slide-title anim"><i class="fa-solid fa-rocket" style="color:var(--purple)"></i> Mini-PBL: Future Me</h2>
+<div class="two-col">
+<div style="background:#fff;text-align:center" class="anim anim-d1">
+<img src="assets/future-me.png" alt="Future Me" style="width:100%;height:280px;object-fit:cover;border-radius:18px;margin-bottom:15px">
+<p style="font-size:20px;line-height:1.5">You are ~10 years old <strong>(Childhood)</strong>.<br>In 10 years you will be 20 <strong>(Adulthood)</strong>!</p>
+</div>
+<div style="background:var(--cyan)" class="anim anim-d2">
+<h3 style="font-family:Comfortaa;font-size:26px;margin-bottom:15px">Your Task</h3>
+<ul style="font-size:20px;line-height:1.7;margin-bottom:15px">
+<li>Write or draw <strong>2 physical changes</strong><br><em>"How will your body look different?"</em></li>
+<li style="margin-top:10px">Write or draw <strong>2 mental changes</strong><br><em>"How will your brain think differently?"</em></li>
+</ul>
+<div style="background:rgba(255,255,255,.5);padding:14px;border-radius:12px;margin-top:10px">
+<p style="font-size:16px"><strong>Choose your format:</strong> ✍️ Write · 🎨 Draw · 🎤 Record audio</p>
+</div>
+<div style="background:rgba(255,255,255,.3);padding:12px;border-radius:12px;margin-top:8px">
+<p style="font-size:15px;font-style:italic">"In 10 years, my body will..." / "In 10 years, my brain will..."</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 13: CLOSURE -->
+<div class="slide" style="background:var(--green)">
+<div style="text-align:center;width:100%">
+<p class="emoji anim float" style="font-size:70px">🌟</p>
+<h1 class="anim anim-d1" style="font-size:72px;margin-bottom:18px">Great Job!</h1>
+<p class="anim anim-d2" style="font-size:24px;margin-bottom:30px;color:var(--dark)">You explored all the stages of human growth today!</p>
+<div class="anim anim-d3" style="display:inline-flex;gap:20px;flex-wrap:wrap;justify-content:center">
+<div style="background:#fff;border-radius:20px;padding:20px 30px;text-align:center">
+<p style="font-size:16px;font-weight:700;color:var(--orange)">📝 HOMEWORK</p>
+<p style="font-size:18px">"Talk & Write About It"<br>Page 37, Q1–4</p>
+</div>
+<div style="background:#fff;border-radius:20px;padding:20px 30px;text-align:center">
+<p style="font-size:16px;font-weight:700;color:var(--purple)">🏆 NEXT CLASS</p>
+<p style="font-size:18px">Vocabulary<br>Spelling Bee!</p>
+</div>
+</div>
+<p class="anim anim-d4" style="font-size:18px;margin-top:25px;color:var(--dark);opacity:.6">Can we answer any of our <strong>Wonders</strong> from the beginning of class?</p>
+</div>
+</div>
+
+</div>
+
+<nav>
+<button onclick="prevSlide()" title="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+<button onclick="nextSlide()" title="Next"><i class="fa-solid fa-chevron-right"></i></button>
+</nav>
+<div class="counter" id="counter"></div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+let cur=0;
+function show(n){
+ slides.forEach((s,i)=>{s.classList.toggle('active',i===n)});
+ document.getElementById('counter').textContent=`${n+1} / ${slides.length}`;
+ document.getElementById('progress').style.width=`${((n+1)/slides.length)*100}%`;
+}
+function nextSlide(){if(cur<slides.length-1){cur++;show(cur)}}
+function prevSlide(){if(cur>0){cur--;show(cur)}}
+document.addEventListener('keydown',e=>{
+ if(e.key==='ArrowRight'||e.key===' ')nextSlide();
+ if(e.key==='ArrowLeft')prevSlide();
+});
+show(0);
+</script>
+</body>
+</html>
