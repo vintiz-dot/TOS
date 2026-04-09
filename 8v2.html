@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 8 Project: The Transformation Theme Park</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            body { background-color: white; color: black; }
+            .no-print { display: none; }
+            .page-break { page-break-before: always; }
+            .border-blue-500 { border-color: #000 !important; }
+            .bg-blue-50 { background-color: #f3f4f6 !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans leading-relaxed">
+
+    <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 my-8 shadow-lg border-t-8 border-indigo-600 rounded-lg">
+        
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl font-bold text-indigo-800 uppercase tracking-wide">The Math Shape Park</h1>
+            <p class="text-xl text-gray-600 mt-2">Moving Shapes Project</p>
+            <div class="mt-4 inline-block bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm font-semibold">
+                Things you need: Big Paper, Pencil, Ruler, Eraser
+            </div>
+        </header>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-3 border-b-2 border-indigo-200 pb-2">About the Project</h2>
+            <p class="mb-4"><strong>The Story:</strong> You are the boss of a new fun park. The park needs to look nice. You must use math to move and change shapes to build the park.</p>
+            <p><strong>Your Job:</strong> First, draw a big shape with 6 corners. This is the Main Square. Next, move, flip, turn, and change the size of this shape to make other park areas. You must write down all your math points.</p>
+        </section>
+
+        <!-- SCAFFOLD 1: Step-by-Step Breakdown -->
+        <section class="mb-8 bg-indigo-50 p-6 rounded-lg border border-indigo-100">
+            <h2 class="text-xl font-bold text-indigo-800 mb-4 flex items-center">
+                <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                Step 1: Draw the Map
+            </h2>
+            <ol class="list-decimal list-inside space-y-3 text-gray-700 ml-2">
+                <li><strong>Draw the Lines:</strong> Use your ruler to draw the X line and Y line on your paper.</li>
+                <li><strong>The Main Square (Start Shape):</strong> Draw a shape with 6 corners. Name the corners A, B, C, D, E, and F. Write down their points (x, y).</li>
+                <li><strong>The Water Park (Reflection / Flip):</strong> Flip the Main Square over the X line or the Y line.</li>
+                <li><strong>The Fast Rides (Translation / Slide):</strong> Slide the Main Square (for example: go up 5, go left 8).</li>
+                <li><strong>The Big Wheel (Rotation / Turn):</strong> Turn the Main Square around the center point (0,0).</li>
+                <li><strong>The Big Gate (Dilation / Make Bigger):</strong> Make the Main Square bigger.</li>
+                <li><strong>The Food Shops (Dilation / Make Smaller):</strong> Make the Main Square smaller.</li>
+            </ol>
+        </section>
+
+        <!-- SCAFFOLD 2: The Logbook -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-3 border-b-2 border-indigo-200 pb-2">Step 2: Your Math Notes</h2>
+            <p class="mb-4 text-gray-600">You must write down all your math steps. Draw this table on your paper.</p>
+            
+            <div class="overflow-x-auto border border-gray-300 rounded">
+                <table class="min-w-full bg-white text-sm">
+                    <thead class="bg-gray-100 text-gray-700">
+                        <tr>
+                            <th class="py-2 px-4 border-b text-left">Park Area Name</th>
+                            <th class="py-2 px-4 border-b text-left">How It Moved</th>
+                            <th class="py-2 px-4 border-b text-left">Math Rule</th>
+                            <th class="py-2 px-4 border-b text-left">Start Points (x,y)</th>
+                            <th class="py-2 px-4 border-b text-left">New Points (x,y)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600">
+                        <tr>
+                            <td class="py-3 px-4 border-b italic">Example: Food Court</td>
+                            <td class="py-3 px-4 border-b">Flip over X-axis</td>
+                            <td class="py-3 px-4 border-b">(x, y) &rarr; (x, -y)</td>
+                            <td class="py-3 px-4 border-b">A(2,3), B(4,5)...</td>
+                            <td class="py-3 px-4 border-b">A'(2,-3), B'(4,-5)...</td>
+                        </tr>
+                        <!-- Empty rows for illustration -->
+                        <tr><td class="py-4 px-4 border-b"></td><td class="border-b"></td><td class="border-b"></td><td class="border-b"></td><td class="border-b"></td></tr>
+                        <tr><td class="py-4 px-4 border-b"></td><td class="border-b"></td><td class="border-b"></td><td class="border-b"></td><td class="border-b"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SCAFFOLD 3: Concept Reminders -->
+        <section class="mb-8 bg-yellow-50 p-6 rounded-lg border border-yellow-200 shadow-sm">
+            <h3 class="text-lg font-bold text-yellow-800 mb-2">Helpful Math Rules</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-yellow-900">
+                <div>
+                    <strong>Slide (Translation):</strong> Move the shape. <br>Rule: $(x, y) \rightarrow (x+a, y+b)$
+                </div>
+                <div>
+                    <strong>Flip (Reflection over X):</strong> Flip like a mirror. Rule: $(x, y) \rightarrow (x, -y)$<br>
+                    <strong>Flip (Reflection over Y):</strong> Flip like a mirror. Rule: $(x, y) \rightarrow (-x, y)$
+                </div>
+                <div>
+                    <strong>Turn (Rotation 90° CW):</strong> Spin the shape. Rule: $(x, y) \rightarrow (y, -x)$<br>
+                    <strong>Turn (Rotation 180°):</strong> Spin the shape. Rule: $(x, y) \rightarrow (-x, -y)$
+                </div>
+                <div>
+                    <strong>Change Size (Dilation):</strong> Make it bigger or smaller. <br>Rule: $(x, y) \rightarrow (kx, ky)$ where <em>k</em> is the size number.
+                </div>
+            </div>
+        </section>
+
+        <!-- RUBRIC -->
+        <section class="page-break">
+            <h2 class="text-2xl font-bold text-gray-800 mb-3 border-b-2 border-indigo-200 pb-2">How You Will Be Graded</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-sm border-collapse border border-gray-300">
+                    <thead class="bg-indigo-600 text-white">
+                        <tr>
+                            <th class="py-2 px-3 border text-left w-1/4">Thing to Check</th>
+                            <th class="py-2 px-3 border text-left w-1/4">Great Job (4)</th>
+                            <th class="py-2 px-3 border text-left w-1/4">Good Job (3)</th>
+                            <th class="py-2 px-3 border text-left w-1/4">Needs Help (1-2)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700 bg-white">
+                        <tr>
+                            <td class="py-3 px-3 border font-semibold">Correct Math</td>
+                            <td class="py-3 px-3 border">All points are in the right place. Math rules are 100% correct.</td>
+                            <td class="py-3 px-3 border">Most points are correct. A few small mistakes.</td>
+                            <td class="py-3 px-3 border">Many mistakes. The shapes look wrong.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-3 border font-semibold">Good Design</td>
+                            <td class="py-3 px-3 border">The start shape has 6 corners. The park looks great on the paper.</td>
+                            <td class="py-3 px-3 border">The shape has 6 corners. The park looks okay.</td>
+                            <td class="py-3 px-3 border">The shape is too easy (like a triangle). The park is messy.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-3 border font-semibold">Math Notes</td>
+                            <td class="py-3 px-3 border">The table is totally full and easy to read. You wrote every rule.</td>
+                            <td class="py-3 px-3 border">The table is mostly done. You missed a few rules.</td>
+                            <td class="py-3 px-3 border">The table is empty or very hard to read.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-3 border font-semibold">Neat Work</td>
+                            <td class="py-3 px-3 border">You used a ruler for straight lines. Paper is very clean.</td>
+                            <td class="py-3 px-3 border">Mostly neat, but you did not use a ruler for everything.</td>
+                            <td class="py-3 px-3 border">Lines are not straight. Paper is dirty or wrinkled.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="mt-8 text-center no-print">
+            <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded shadow transition duration-200">
+                Print Project Brief
+            </button>
+        </div>
+
+    </div>
+
+</body>
+</html>
